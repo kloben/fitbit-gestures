@@ -1,0 +1,21 @@
+{
+  "extends": "./node_modules/@fitbit/sdk/sdk-tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "noEmit": false,
+    "sourceMap": false,
+    "declaration": true,
+    "removeComments": false
+  },
+  "include": [
+    "**/*.ts",
+    "./node_modules/fitbit-sdk-types/types/device",
+    "./node_modules/fitbit-sdk-types/types/companion"
+  ],
+  "exclude": [
+    "./dist/**/*.ts",
+    "./node_modules/fitbit-sdk-types/types/companion/crypto.d.ts",
+    "./node_modules/fitbit-sdk-types/types/companion/file-transfer.d.ts",
+    "./node_modules/fitbit-sdk-types/types/companion/user-settings.d.ts",
+  ]
+}

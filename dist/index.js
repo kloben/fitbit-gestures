@@ -1,0 +1,1 @@
+export { SwipeDetector } from "./SwipeDetector";

@@ -1,0 +1,19 @@
+{
+  "name": "fitbit-gestures",
+  "version": "0.0.1",
+  "description": "Library to detect gestures on Fitbit devices",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@fitbit/sdk": "5.0.1",
+    "@fitbit/sdk-cli": "1.7.3",
+    "fitbit-sdk-types": "6.0.0",
+    "typescript": "^4.0.3"
+  }
+}
