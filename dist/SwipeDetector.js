@@ -21,7 +21,7 @@ var SwipeDetector = /** @class */ (function () {
         if (!this.element) {
             throw new Error('Element not found');
         }
-        this.threshold = (cfg === null || cfg === void 0 ? void 0 : cfg.threshold) || 100;
+        this.threshold = (cfg && cfg.threshold) ? cfg.threshold : 100;
         this.element.onmousedown = this._onMouseDown;
         this.element.onmouseup = this._onMouseUp;
     }

@@ -30,7 +30,7 @@ export class SwipeDetector {
       throw new Error('Element not found');
     }
 
-    this.threshold = cfg?.threshold || 100;
+    this.threshold = (cfg && cfg.threshold) ? cfg.threshold : 100;
     this.element.onmousedown = this._onMouseDown;
     this.element.onmouseup = this._onMouseUp;
   }
