@@ -1,2 +1,2 @@
-export {SwipeDetector} from "./SwipeDetector";
-export {InitConfig} from "./interfaces/init-config";
+export {SwipeDetector, SwipeConfig} from "./SwipeDetector";
+
