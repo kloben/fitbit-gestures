@@ -36,16 +36,13 @@ export class SwipeDetector {
   }
 
   private _onMouseDown(evt: MouseEvent) {
-    console.log('DOWN');
     this.initY = evt.screenY;
     this.initX = evt.screenX;
   }
 
   private _onMouseUp(evt: MouseEvent) {
-    console.log('UP');
     let x = evt.screenX - this.initX;
     let y = evt.screenY - this.initY;
-    console.log(`${x} - ${y} - ${this.threshold}`);
 
     if (y < -this.threshold) {
       this.swipeCallback(SWIPE_DIR.UP);
