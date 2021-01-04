@@ -8,8 +8,8 @@ export declare enum SWIPE_DIR {
     RIGHT = 3
 }
 export declare class SwipeDetector {
-    private readonly element;
     private readonly swipeCallback;
+    private readonly element;
     private readonly threshold;
     private initY;
     private initX;

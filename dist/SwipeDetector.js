@@ -1,4 +1,4 @@
-import document from "document";
+import { findElement } from "./helpers/find-element.helper";
 export var SWIPE_DIR;
 (function (SWIPE_DIR) {
     SWIPE_DIR[SWIPE_DIR["UP"] = 0] = "UP";
@@ -8,20 +8,11 @@ export var SWIPE_DIR;
 })(SWIPE_DIR || (SWIPE_DIR = {}));
 var SwipeDetector = /** @class */ (function () {
     function SwipeDetector(element, swipeCallback, cfg) {
-        this.element = element;
         this.swipeCallback = swipeCallback;
         this.initY = 0;
         this.initX = 0;
-        if (typeof element === 'string') {
-            this.element = document.getElementById(element);
-        }
-        else {
-            this.element = element;
-        }
-        if (!this.element) {
-            throw new Error('Element not found');
-        }
-        this.threshold = (cfg && cfg.threshold) ? cfg.threshold : 100;
+        this.element = findElement(element);
+        this.threshold = (cfg === null || cfg === void 0 ? void 0 : cfg.threshold) || 100;
         this.element.onmousedown = this._onMouseDown.bind(this);
         this.element.onmouseup = this._onMouseUp.bind(this);
     }
