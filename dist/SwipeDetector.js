@@ -26,12 +26,15 @@ var SwipeDetector = /** @class */ (function () {
         this.element.onmouseup = this._onMouseUp;
     }
     SwipeDetector.prototype._onMouseDown = function (evt) {
+        console.log('DOWN');
         this.initY = evt.screenY;
         this.initX = evt.screenX;
     };
     SwipeDetector.prototype._onMouseUp = function (evt) {
+        console.log('UP');
         var x = evt.screenX - this.initX;
         var y = evt.screenY - this.initY;
+        console.log(x + " - " + y + " - " + this.threshold);
         if (y < -this.threshold) {
             this.swipeCallback(SWIPE_DIR.UP);
         }
