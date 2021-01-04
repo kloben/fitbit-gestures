@@ -31,8 +31,8 @@ export class SwipeDetector {
     }
 
     this.threshold = (cfg && cfg.threshold) ? cfg.threshold : 100;
-    this.element.onmousedown = this._onMouseDown;
-    this.element.onmouseup = this._onMouseUp;
+    this.element.onmousedown = this._onMouseDown.bind(this);
+    this.element.onmouseup = this._onMouseUp.bind(this);
   }
 
   private _onMouseDown(evt: MouseEvent) {
