@@ -1,10 +1,10 @@
 import {findElement} from "./helpers/find-element.helper";
 
-export interface TapConfig {
+export interface DoubleTapConfig {
   threshold: number
 }
 
-export class TapDetector {
+export class DoubleTapDetector {
   private readonly element: Element;
   private readonly threshold: number;
   private lastTap: number | null = null;
@@ -12,7 +12,7 @@ export class TapDetector {
   constructor(
     element: string | Element,
     private readonly tapCallback: () => any,
-    cfg?: TapConfig
+    cfg?: DoubleTapConfig
   ) {
     this.element = findElement(element);
     this.threshold = cfg?.threshold || 250;
