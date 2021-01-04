@@ -1,1 +1,1 @@
-export { SwipeDetector } from "./SwipeDetector";
+export { SwipeDetector, SWIPE_DIR } from "./SwipeDetector";
