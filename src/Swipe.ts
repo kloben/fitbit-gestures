@@ -1,5 +1,3 @@
-import {findElement} from "./helpers/find-element.helper";
-
 export interface SwipeConfig {
   threshold: number
 }

@@ -1,6 +1,6 @@
 import {Swipe} from "./Swipe";
 
-export class PrivateSwipeDetector extends Swipe {
+export class SwipePrivate extends Swipe {
 
   onMouseDown(evt: MouseEvent) {
     super._onMouseDown(evt);
