@@ -1,19 +1,5 @@
-export interface SwipeConfig {
-    threshold: number;
-}
-export declare enum SWIPE_DIR {
-    UP = 0,
-    DOWN = 1,
-    LEFT = 2,
-    RIGHT = 3
-}
-export declare class SwipeDetector {
-    private readonly swipeCallback;
+import { Swipe, SWIPE_DIR, SwipeConfig } from "./Swipe";
+export declare class SwipeDetector extends Swipe {
     private readonly element;
-    private readonly threshold;
-    private initY;
-    private initX;
     constructor(element: string | Element, swipeCallback: (dir: SWIPE_DIR) => any, cfg?: SwipeConfig);
-    private _onMouseDown;
-    private _onMouseUp;
 }
