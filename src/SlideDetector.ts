@@ -9,7 +9,6 @@ export class SlideDetector {
 
   constructor(
     element: string | Element,
-
   ) {
     this.element = findElement(element);
     this.element.onmousedown = this._onMouseDown.bind(this);

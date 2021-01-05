@@ -39,8 +39,8 @@ export class GestureDetector {
     return this;
   }
 
-  private _addListener (gesture: string, cb: Function) {
-    if(!this.callbacks[gesture]) {
+  private _addListener(gesture: string, cb: Function) {
+    if (!this.callbacks[gesture]) {
       this.callbacks[gesture] = [];
       this.element[`onmouse${gesture}`] = (evt: MouseEvent) => {
         this.callbacks[gesture].forEach((fn: Function) => fn(evt));

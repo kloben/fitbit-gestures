@@ -1,5 +1,3 @@
-import {SWIPE_DIR} from "./Swipe";
-
 export interface DoubleTapConfig {
   threshold: number
 }
