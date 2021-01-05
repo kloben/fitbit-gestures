@@ -1,12 +1,12 @@
 import {findElement} from "./helpers/find-element.helper";
-import {Swipe, SWIPE_DIR, SwipeConfig} from "./Swipe";
+import {Swipe, SwipeCallback, SwipeConfig} from "./Swipe";
 
 export class SwipeDetector extends Swipe {
   private readonly element: Element;
 
   constructor(
     element: string | Element,
-    swipeCallback: (dir: SWIPE_DIR) => any,
+    swipeCallback: SwipeCallback,
     cfg?: SwipeConfig
   ) {
     super(swipeCallback, cfg);

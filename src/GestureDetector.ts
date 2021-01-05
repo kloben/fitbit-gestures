@@ -1,5 +1,8 @@
-import {DoubleTapConfig} from "./DoubleTapDetector";
-import {SWIPE_DIR, SwipeConfig} from "./Swipe";
+import {SwipeCallback, SwipeConfig} from "./Swipe";
+import {findElement} from "./helpers/find-element.helper";
+import {SwipePrivate} from "./SwipePrivate";
+import {DoubleTapPrivate} from "./DoubleTapPrivate";
+import {DoubleTapCallback, DoubleTapConfig} from "./DoubleTap";
 
 export interface GestureConfig {
 
@@ -7,32 +10,44 @@ export interface GestureConfig {
 
 export class GestureDetector {
   private readonly element: Element;
-  private readonly upFunctions: Array<Function> = null;
-  private readonly downFunctions: Array<Function> = null;
-  private readonly moveFunctions: Array<Function> = null;
+  private swipe: SwipePrivate;
+  private doubleTap: DoubleTapPrivate;
+  private callbacks = {
+    up: null,
+    down: null,
+    move: null
+  }
 
   constructor(
     element: string | Element,
     cfg?: GestureConfig
   ) {
+    this.element = findElement(element);
     return this;
   }
 
-  private _initUp () {
-    this.element.onmouseup = (evt: MouseEvent) => {
-      this.upFunctions.forEach((fn: Function) => fn(evt));
+  onSwipe(cb: SwipeCallback, cfg?: SwipeConfig) {
+    this.swipe = new SwipePrivate(cb, cfg)
+    this._addListener('up', this.swipe.onMouseUp);
+    this._addListener('down', this.swipe.onMouseDown);
+    return this;
+  }
+
+  onDoubleTap(cb: DoubleTapCallback, cfg?: DoubleTapConfig) {
+    this.doubleTap = new DoubleTapPrivate(cb, cfg)
+    this._addListener('up', this.doubleTap.onMouseUp);
+    return this;
+  }
+
+  private _addListener (gesture: string, cb: Function) {
+    if(!this.callbacks[gesture]) {
+      this.callbacks[gesture] = [];
+      this.element[`onmouse${gesture}`] = (evt: MouseEvent) => {
+        this.callbacks[gesture].forEach((fn: Function) => fn(evt));
+      }
     }
-  }
 
-  onSwipe(swipeCallback: (dir: SWIPE_DIR) => any, swipeCfg?: SwipeConfig) {
-    //add event listener
-    return this;
+    this.callbacks[gesture].push(cb);
   }
-
-  onDoubleTap(doubleTapCallback: () => any, doubleTapCfg?: DoubleTapConfig) {
-    //add event listener
-    return this;
-  }
-
 
 }

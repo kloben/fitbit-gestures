@@ -9,13 +9,15 @@ export enum SWIPE_DIR {
   RIGHT
 }
 
+export type SwipeCallback = (dir: SWIPE_DIR) => any;
+
 export class Swipe {
   private readonly threshold: number;
   private initY: number = 0;
   private initX: number = 0;
 
   constructor(
-    private readonly swipeCallback: (dir: SWIPE_DIR) => any,
+    private readonly swipeCallback: SwipeCallback,
     cfg?: SwipeConfig
   ) {
     this.threshold = cfg?.threshold || 100;

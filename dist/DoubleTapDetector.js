@@ -1,19 +1,14 @@
+import { __extends } from "tslib";
 import { findElement } from "./helpers/find-element.helper";
-var DoubleTapDetector = /** @class */ (function () {
+import { DoubleTap } from "./DoubleTap";
+var DoubleTapDetector = /** @class */ (function (_super) {
+    __extends(DoubleTapDetector, _super);
     function DoubleTapDetector(element, tapCallback, cfg) {
-        this.tapCallback = tapCallback;
-        this.lastTap = null;
-        this.element = findElement(element);
-        this.threshold = (cfg === null || cfg === void 0 ? void 0 : cfg.threshold) || 250;
-        this.element.onmouseup = this._onMouseUp.bind(this);
+        var _this = _super.call(this, tapCallback, cfg) || this;
+        _this.element = findElement(element);
+        _this.element.onmouseup = _this._onMouseUp.bind(_this);
+        return _this;
     }
-    DoubleTapDetector.prototype._onMouseUp = function (evt) {
-        var now = Date.now();
-        if (now && now - this.lastTap < 250) {
-            this.tapCallback();
-        }
-        this.lastTap = now;
-    };
     return DoubleTapDetector;
-}());
+}(DoubleTap));
 export { DoubleTapDetector };

@@ -1,23 +1,36 @@
+import { findElement } from "./helpers/find-element.helper";
+import { SwipePrivate } from "./SwipePrivate";
+import { DoubleTapPrivate } from "./DoubleTapPrivate";
 var GestureDetector = /** @class */ (function () {
     function GestureDetector(element, cfg) {
-        this.upFunctions = null;
-        this.downFunctions = null;
-        this.moveFunctions = null;
+        this.callbacks = {
+            up: null,
+            down: null,
+            move: null
+        };
+        this.element = findElement(element);
         return this;
     }
-    GestureDetector.prototype._initUp = function () {
+    GestureDetector.prototype.onSwipe = function (cb, cfg) {
+        this.swipe = new SwipePrivate(cb, cfg);
+        this._addListener('up', this.swipe.onMouseUp);
+        this._addListener('down', this.swipe.onMouseDown);
+        return this;
+    };
+    GestureDetector.prototype.onDoubleTap = function (cb, cfg) {
+        this.doubleTap = new DoubleTapPrivate(cb, cfg);
+        this._addListener('up', this.doubleTap.onMouseUp);
+        return this;
+    };
+    GestureDetector.prototype._addListener = function (gesture, cb) {
         var _this = this;
-        this.element.onmouseup = function (evt) {
-            _this.upFunctions.forEach(function (fn) { return fn(evt); });
-        };
-    };
-    GestureDetector.prototype.onSwipe = function (swipeCallback, swipeCfg) {
-        //add event listener
-        return this;
-    };
-    GestureDetector.prototype.onDoubleTap = function (doubleTapCallback, doubleTapCfg) {
-        //add event listener
-        return this;
+        if (!this.callbacks[gesture]) {
+            this.callbacks[gesture] = [];
+            this.element["onmouse" + gesture] = function (evt) {
+                _this.callbacks[gesture].forEach(function (fn) { return fn(evt); });
+            };
+        }
+        this.callbacks[gesture].push(cb);
     };
     return GestureDetector;
 }());

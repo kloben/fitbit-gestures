@@ -1,13 +1,17 @@
+import {SWIPE_DIR} from "./Swipe";
+
 export interface DoubleTapConfig {
   threshold: number
 }
+
+export type DoubleTapCallback = () => any;
 
 export class DoubleTap {
   private readonly threshold: number;
   private lastTap: number | null = null;
 
   constructor(
-    private readonly tapCallback: () => any,
+    private readonly tapCallback: DoubleTapCallback,
     cfg?: DoubleTapConfig
   ) {
     this.threshold = cfg?.threshold || 250;

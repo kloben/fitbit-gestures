@@ -1,11 +1,5 @@
-export interface DoubleTapConfig {
-    threshold: number;
-}
-export declare class DoubleTapDetector {
-    private readonly tapCallback;
+import { DoubleTap, DoubleTapCallback, DoubleTapConfig } from "./DoubleTap";
+export declare class DoubleTapDetector extends DoubleTap {
     private readonly element;
-    private readonly threshold;
-    private lastTap;
-    constructor(element: string | Element, tapCallback: () => any, cfg?: DoubleTapConfig);
-    private _onMouseUp;
+    constructor(element: string | Element, tapCallback: DoubleTapCallback, cfg?: DoubleTapConfig);
 }

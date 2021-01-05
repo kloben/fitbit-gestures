@@ -7,12 +7,13 @@ export declare enum SWIPE_DIR {
     LEFT = 2,
     RIGHT = 3
 }
+export declare type SwipeCallback = (dir: SWIPE_DIR) => any;
 export declare class Swipe {
     private readonly swipeCallback;
     private readonly threshold;
     private initY;
     private initX;
-    constructor(swipeCallback: (dir: SWIPE_DIR) => any, cfg?: SwipeConfig);
+    constructor(swipeCallback: SwipeCallback, cfg?: SwipeConfig);
     protected _onMouseDown(evt: MouseEvent): void;
     protected _onMouseUp(evt: MouseEvent): void;
 }
