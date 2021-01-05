@@ -28,14 +28,14 @@ export class GestureDetector {
 
   onSwipe(cb: SwipeCallback, cfg?: SwipeConfig) {
     this.swipe = new SwipePrivate(cb, cfg)
-    this._addListener('up', this.swipe.onMouseUp);
-    this._addListener('down', this.swipe.onMouseDown);
+    this._addListener('up', this.swipe.onMouseUp.bind(this.swipe));
+    this._addListener('down', this.swipe.onMouseDown.bind(this.swipe));
     return this;
   }
 
   onDoubleTap(cb: DoubleTapCallback, cfg?: DoubleTapConfig) {
     this.doubleTap = new DoubleTapPrivate(cb, cfg)
-    this._addListener('up', this.doubleTap.onMouseUp);
+    this._addListener('up', this.doubleTap.onMouseUp.bind(this.doubleTap));
     return this;
   }
 

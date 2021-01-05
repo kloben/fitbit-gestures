@@ -13,13 +13,13 @@ var GestureDetector = /** @class */ (function () {
     }
     GestureDetector.prototype.onSwipe = function (cb, cfg) {
         this.swipe = new SwipePrivate(cb, cfg);
-        this._addListener('up', this.swipe.onMouseUp);
-        this._addListener('down', this.swipe.onMouseDown);
+        this._addListener('up', this.swipe.onMouseUp.bind(this.swipe));
+        this._addListener('down', this.swipe.onMouseDown.bind(this.swipe));
         return this;
     };
     GestureDetector.prototype.onDoubleTap = function (cb, cfg) {
         this.doubleTap = new DoubleTapPrivate(cb, cfg);
-        this._addListener('up', this.doubleTap.onMouseUp);
+        this._addListener('up', this.doubleTap.onMouseUp.bind(this.doubleTap));
         return this;
     };
     GestureDetector.prototype._addListener = function (gesture, cb) {
