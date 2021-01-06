@@ -3,6 +3,8 @@ import {findElement} from "./helpers/find-element.helper";
 import {SwipePrivate} from "./SwipePrivate";
 import {DoubleTapPrivate} from "./DoubleTapPrivate";
 import {DoubleTapCallback, DoubleTapConfig} from "./DoubleTap";
+import {SlideCallback, SlideConfig} from "./Slide";
+import {SlidePrivate} from "./SlidePrivate";
 
 export interface GestureConfig {
 
@@ -12,6 +14,7 @@ export class GestureDetector {
   private readonly element: Element;
   private swipe: SwipePrivate;
   private doubleTap: DoubleTapPrivate;
+  private slide: SlidePrivate;
   private callbacks = {
     up: null,
     down: null,
@@ -36,6 +39,14 @@ export class GestureDetector {
   onDoubleTap(cb: DoubleTapCallback, cfg?: DoubleTapConfig) {
     this.doubleTap = new DoubleTapPrivate(cb, cfg)
     this._addListener('up', this.doubleTap.onMouseUp.bind(this.doubleTap));
+    return this;
+  }
+
+  onSlide(cb: SlideCallback, cfg?: SlideConfig) {
+    this.slide = new SlidePrivate(cb, cfg);
+    this._addListener('up', this.slide.onMouseUp.bind(this.slide));
+    this._addListener('down', this.slide.onMouseDown.bind(this.slide));
+    this._addListener('move', this.slide.onMouseMove.bind(this.slide));
     return this;
   }
 

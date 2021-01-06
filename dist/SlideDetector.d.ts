@@ -1,8 +1,5 @@
-export interface SlideConfig {
-}
-export declare class SlideDetector {
+import { Slide, SlideCallback, SlideConfig } from "./Slide";
+export declare class SlideDetector extends Slide {
     private readonly element;
-    constructor(element: string | Element);
-    private _onMouseDown;
-    private _onMouseUp;
+    constructor(element: string | Element, slideCallback: SlideCallback, cfg?: SlideConfig);
 }

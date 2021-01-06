@@ -1,6 +1,7 @@
 import { findElement } from "./helpers/find-element.helper";
 import { SwipePrivate } from "./SwipePrivate";
 import { DoubleTapPrivate } from "./DoubleTapPrivate";
+import { SlidePrivate } from "./SlidePrivate";
 var GestureDetector = /** @class */ (function () {
     function GestureDetector(element, cfg) {
         this.callbacks = {
@@ -20,6 +21,13 @@ var GestureDetector = /** @class */ (function () {
     GestureDetector.prototype.onDoubleTap = function (cb, cfg) {
         this.doubleTap = new DoubleTapPrivate(cb, cfg);
         this._addListener('up', this.doubleTap.onMouseUp.bind(this.doubleTap));
+        return this;
+    };
+    GestureDetector.prototype.onSlide = function (cb, cfg) {
+        this.slide = new SlidePrivate(cb, cfg);
+        this._addListener('up', this.slide.onMouseUp.bind(this.slide));
+        this._addListener('down', this.slide.onMouseDown.bind(this.slide));
+        this._addListener('move', this.slide.onMouseMove.bind(this.slide));
         return this;
     };
     GestureDetector.prototype._addListener = function (gesture, cb) {

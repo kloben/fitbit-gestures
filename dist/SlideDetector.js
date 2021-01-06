@@ -1,14 +1,16 @@
+import { __extends } from "tslib";
 import { findElement } from "./helpers/find-element.helper";
-var SlideDetector = /** @class */ (function () {
-    function SlideDetector(element) {
-        this.element = findElement(element);
-        this.element.onmousedown = this._onMouseDown.bind(this);
-        this.element.onmouseup = this._onMouseUp.bind(this);
+import { Slide } from "./Slide";
+var SlideDetector = /** @class */ (function (_super) {
+    __extends(SlideDetector, _super);
+    function SlideDetector(element, slideCallback, cfg) {
+        var _this = _super.call(this, slideCallback, cfg) || this;
+        _this.element = findElement(element);
+        _this.element.onmousedown = _this._onMouseDown.bind(_this);
+        _this.element.onmouseup = _this._onMouseUp.bind(_this);
+        _this.element.onmousemove = _this._onMouseMove.bind(_this);
+        return _this;
     }
-    SlideDetector.prototype._onMouseDown = function (evt) {
-    };
-    SlideDetector.prototype._onMouseUp = function (evt) {
-    };
     return SlideDetector;
-}());
+}(Slide));
 export { SlideDetector };
