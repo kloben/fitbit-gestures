@@ -18,8 +18,10 @@ export interface MovementData {
 export type SlideCallback = (data: SlideData) => any;
 
 export class Slide {
-  private startX: number;
-  private startY: number;
+  private startX: number = null;
+  private lastX: number = null;
+  private startY: number = null;
+  private lastY: number = null;
 
   constructor(
     private readonly slideCallback: SlideCallback
@@ -33,17 +35,21 @@ export class Slide {
 
   protected _onMouseUp(evt: MouseEvent) {
     const data = this._generateEvent(SLIDE_EVENT.ENDED, evt);
-    this.startX = 0;
-    this.startY = 0;
+    this.startX = null;
+    this.startY = null;
+    this.lastX = null;
+    this.lastY = null;
     return data;
   }
 
   protected _onMouseMove(evt: MouseEvent) {
+    this.lastX = evt.screenX;
+    this.lastY = evt.screenY;
     return this._generateEvent(SLIDE_EVENT.MOVED, evt);
   }
 
   private _generateEvent(type: SLIDE_EVENT, evt: MouseEvent) {
-    if (!this.startX) {
+    if (this.startX === null || (this.startX === this.lastX && this.startY === this.lastY)) {
       return;
     }
 

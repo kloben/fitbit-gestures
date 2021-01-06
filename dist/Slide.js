@@ -7,6 +7,10 @@ export var SLIDE_EVENT;
 var Slide = /** @class */ (function () {
     function Slide(slideCallback) {
         this.slideCallback = slideCallback;
+        this.startX = null;
+        this.lastX = null;
+        this.startY = null;
+        this.lastY = null;
     }
     Slide.prototype._onMouseDown = function (evt) {
         this.startX = evt.screenX;
@@ -15,15 +19,19 @@ var Slide = /** @class */ (function () {
     };
     Slide.prototype._onMouseUp = function (evt) {
         var data = this._generateEvent(SLIDE_EVENT.ENDED, evt);
-        this.startX = 0;
-        this.startY = 0;
+        this.startX = null;
+        this.startY = null;
+        this.lastX = null;
+        this.lastY = null;
         return data;
     };
     Slide.prototype._onMouseMove = function (evt) {
+        this.lastX = evt.screenX;
+        this.lastY = evt.screenY;
         return this._generateEvent(SLIDE_EVENT.MOVED, evt);
     };
     Slide.prototype._generateEvent = function (type, evt) {
-        if (!this.startX) {
+        if (this.startX === null || (this.startX === this.lastX && this.startY === this.lastY)) {
             return;
         }
         this.slideCallback({

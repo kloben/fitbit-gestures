@@ -16,7 +16,9 @@ export declare type SlideCallback = (data: SlideData) => any;
 export declare class Slide {
     private readonly slideCallback;
     private startX;
+    private lastX;
     private startY;
+    private lastY;
     constructor(slideCallback: SlideCallback);
     protected _onMouseDown(evt: MouseEvent): void;
     protected _onMouseUp(evt: MouseEvent): void;
