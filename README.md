@@ -8,7 +8,7 @@ Install the library with `npm i fitbit-gestures` or `yarn add fitbit-gestures`
 
 ## Gestures
 
-**Swipe, Double Tap** (More gestures soon) 
+**Swipe, Double Tap, Slide** (More gestures soon) 
 
 ## Usage
 
@@ -24,16 +24,19 @@ You must provide an [Element](https://dev.fitbit.com/build/reference/device-api/
 For each gesture, you can customize the detectors. View Single Gesture examples below.
 
 ```typescript
-import { GestureDetector } from 'fitbit-gestures';
+import { GestureDetector, SlideData, SWIPE_DIR } from 'fitbit-gestures';
 
 // Get the element. You can also pass the element ID
-const element = document.getElementById('screen'); 
+const element = document.getElementById('some_element'); 
 
 const detector = new GestureDetector(element)
     .onSwipe((dir: SWIPE_DIR) => {
       //Do something
     })
     .onDoubleTap(() => {
+      //Do something
+    })
+    .onSlide((data: SlideData) => {
       //Do something
     });
 ```
@@ -49,9 +52,9 @@ If you only need one type of gesture, it will be slightly faster to use a dedica
 import { SwipeDetector, SWIPE_DIR, SwipeConfig } from 'fitbit-gestures';
 
 // Get the element. You can also pass the element ID as string
-const element = document.getElementById('screen');
+const element = document.getElementById('some_element');
 
-//OPTIONAL configuration
+//Optional configuration
 const swipeConfig: SwipeConfig = {
   threshold: 100
 };
@@ -77,8 +80,9 @@ function onSwipe(direction: SWIPE_DIR) {
 import { DoubleTapDetector, DoubleTapConfig } from 'fitbit-gestures';
 
 // Get the element. You can also pass the element ID as string
-const element = document.getElementById('screen'); 
+const element = document.getElementById('some_element'); 
 
+//Optional configuration
 const doubleTapConfig: DoubleTapConfig = {
   interval: 250
 }
@@ -96,3 +100,28 @@ function onDoubleTap() {
 | --- | :--- | --- |
 | **interval** | Time (in ms) required to trigger the event | 250ms
 
+#### Slide only
+
+```typescript
+import { SlideDetector, SlideConfig } from 'fitbit-gestures';
+
+// Get the element. You can also pass the element ID as string
+const element = document.getElementById('some_element');
+
+//Optional configuration
+const slideConfig: SlideConfig = {
+  distance: 50
+}
+
+const detector = new SlideDetector(element, onSlide.bind(this), slideConfig);
+
+function onSlide() {
+  //Do something
+}
+```
+
+##### Slide configuration (Optional)
+
+| Attribute | Description | Default |
+| --- | :--- | --- |
+| **distance** | Minimum distance (in px) required to trigger the event | 50px
