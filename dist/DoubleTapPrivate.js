@@ -5,8 +5,8 @@ var DoubleTapPrivate = /** @class */ (function (_super) {
     function DoubleTapPrivate() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    DoubleTapPrivate.prototype.onMouseUp = function (evt) {
-        _super.prototype._onMouseUp.call(this, evt);
+    DoubleTapPrivate.prototype.onMouseUp = function () {
+        _super.prototype._onMouseUp.call(this);
     };
     return DoubleTapPrivate;
 }(DoubleTap));
