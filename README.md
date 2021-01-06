@@ -103,25 +103,14 @@ function onDoubleTap() {
 #### Slide only
 
 ```typescript
-import { SlideDetector, SlideConfig } from 'fitbit-gestures';
+import { SlideDetector, SlideData } from 'fitbit-gestures';
 
 // Get the element. You can also pass the element ID as string
 const element = document.getElementById('some_element');
 
-//Optional configuration
-const slideConfig: SlideConfig = {
-  distance: 50
-}
+const detector = new SlideDetector(element, onSlide.bind(this));
 
-const detector = new SlideDetector(element, onSlide.bind(this), slideConfig);
-
-function onSlide() {
+function onSlide(data: SlideData) {
   //Do something
 }
 ```
-
-##### Slide configuration (Optional)
-
-| Attribute | Description | Default |
-| --- | :--- | --- |
-| **distance** | Minimum distance (in px) required to trigger the event | 50px

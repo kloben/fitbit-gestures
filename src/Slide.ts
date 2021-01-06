@@ -1,7 +1,3 @@
-export interface SlideConfig {
-  distance: number
-}
-
 export enum SLIDE_EVENT {
   STARTED = 'STARTED',
   MOVED = 'MOVED',
@@ -22,16 +18,12 @@ export interface MovementData {
 export type SlideCallback = (data: SlideData) => any;
 
 export class Slide {
-  private readonly minDistance: number;
   private startX: number;
   private startY: number;
 
   constructor(
-    private readonly slideCallback: SlideCallback,
-    cfg?: SlideConfig
-  ) {
-    this.minDistance = cfg?.distance || 50;
-  }
+    private readonly slideCallback: SlideCallback
+  ) {}
 
   protected _onMouseDown(evt: MouseEvent) {
     this.startX = evt.screenX;
@@ -51,7 +43,7 @@ export class Slide {
   }
 
   private _generateEvent(type: SLIDE_EVENT, evt: MouseEvent) {
-    if (!this.startX || this.startX - evt.screenX < this.minDistance) {
+    if (!this.startX) {
       return;
     }
 

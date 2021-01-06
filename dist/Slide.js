@@ -5,9 +5,8 @@ export var SLIDE_EVENT;
     SLIDE_EVENT["ENDED"] = "ENDED";
 })(SLIDE_EVENT || (SLIDE_EVENT = {}));
 var Slide = /** @class */ (function () {
-    function Slide(slideCallback, cfg) {
+    function Slide(slideCallback) {
         this.slideCallback = slideCallback;
-        this.minDistance = (cfg === null || cfg === void 0 ? void 0 : cfg.distance) || 50;
     }
     Slide.prototype._onMouseDown = function (evt) {
         this.startX = evt.screenX;
@@ -24,7 +23,7 @@ var Slide = /** @class */ (function () {
         return this._generateEvent(SLIDE_EVENT.MOVED, evt);
     };
     Slide.prototype._generateEvent = function (type, evt) {
-        if (!this.startX || this.startX - evt.screenX < this.minDistance) {
+        if (!this.startX) {
             return;
         }
         this.slideCallback({

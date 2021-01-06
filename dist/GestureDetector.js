@@ -23,8 +23,8 @@ var GestureDetector = /** @class */ (function () {
         this._addListener('up', this.doubleTap.onMouseUp.bind(this.doubleTap));
         return this;
     };
-    GestureDetector.prototype.onSlide = function (cb, cfg) {
-        this.slide = new SlidePrivate(cb, cfg);
+    GestureDetector.prototype.onSlide = function (cb) {
+        this.slide = new SlidePrivate(cb);
         this._addListener('up', this.slide.onMouseUp.bind(this.slide));
         this._addListener('down', this.slide.onMouseDown.bind(this.slide));
         this._addListener('move', this.slide.onMouseMove.bind(this.slide));

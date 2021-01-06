@@ -1,6 +1,6 @@
 import { SwipeCallback, SwipeConfig } from "./Swipe";
 import { DoubleTapCallback, DoubleTapConfig } from "./DoubleTap";
-import { SlideCallback, SlideConfig } from "./Slide";
+import { SlideCallback } from "./Slide";
 export interface GestureConfig {
 }
 export declare class GestureDetector {
@@ -12,6 +12,6 @@ export declare class GestureDetector {
     constructor(element: string | Element, cfg?: GestureConfig);
     onSwipe(cb: SwipeCallback, cfg?: SwipeConfig): this;
     onDoubleTap(cb: DoubleTapCallback, cfg?: DoubleTapConfig): this;
-    onSlide(cb: SlideCallback, cfg?: SlideConfig): this;
+    onSlide(cb: SlideCallback): this;
     private _addListener;
 }
