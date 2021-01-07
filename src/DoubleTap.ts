@@ -8,7 +8,7 @@ export class DoubleTap {
   private readonly interval: number;
   private lastTap: number | null = null;
 
-  constructor(
+  protected constructor(
     private readonly tapCallback: DoubleTapCallback,
     cfg?: DoubleTapConfig
   ) {

@@ -23,7 +23,7 @@ export class Slide {
   private startY: number = null;
   private lastY: number = null;
 
-  constructor(
+  protected constructor(
     private readonly slideCallback: SlideCallback
   ) {}
 

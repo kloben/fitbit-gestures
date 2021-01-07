@@ -13,7 +13,7 @@ export declare class Swipe {
     private readonly threshold;
     private initY;
     private initX;
-    constructor(swipeCallback: SwipeCallback, cfg?: SwipeConfig);
+    protected constructor(swipeCallback: SwipeCallback, cfg?: SwipeConfig);
     protected _onMouseDown(evt: MouseEvent): void;
     protected _onMouseUp(evt: MouseEvent): void;
 }

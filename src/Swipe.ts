@@ -16,7 +16,7 @@ export class Swipe {
   private initY: number = 0;
   private initX: number = 0;
 
-  constructor(
+  protected constructor(
     private readonly swipeCallback: SwipeCallback,
     cfg?: SwipeConfig
   ) {

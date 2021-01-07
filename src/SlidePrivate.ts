@@ -1,6 +1,10 @@
-import {Slide} from "./Slide";
+import {Slide, SlideCallback} from "./Slide";
 
 export class SlidePrivate extends Slide {
+
+  constructor(callback: SlideCallback) {
+    super(callback);
+  }
 
   onMouseDown(evt: MouseEvent) {
     super._onMouseDown(evt);
