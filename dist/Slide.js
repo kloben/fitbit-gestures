@@ -28,7 +28,7 @@ var Slide = /** @class */ (function () {
         return data;
     };
     Slide.prototype._onMouseMove = function (evt) {
-        console.log(this.lastX + "-" + evt.screenX + " " + this.lastX + "-" + evt.screenX);
+        console.log(this.lastX + "-" + evt.screenX + " " + this.lastY + "-" + evt.screenY);
         if (this.lastX === evt.screenX && this.lastY === evt.screenY) {
             console.log('Skip');
             return;
