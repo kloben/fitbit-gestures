@@ -15,6 +15,8 @@ var Slide = /** @class */ (function () {
     Slide.prototype._onMouseDown = function (evt) {
         this.startX = evt.screenX;
         this.startY = evt.screenY;
+        this.lastX = evt.screenX;
+        this.lastY = evt.screenY;
         return this._generateEvent(SLIDE_EVENT.STARTED, evt);
     };
     Slide.prototype._onMouseUp = function (evt) {
@@ -26,12 +28,17 @@ var Slide = /** @class */ (function () {
         return data;
     };
     Slide.prototype._onMouseMove = function (evt) {
+        console.log(this.lastX + "-" + evt.screenX + " " + this.lastX + "-" + evt.screenX);
+        if (this.lastX === evt.screenX && this.lastY === evt.screenY) {
+            console.log('Skip');
+            return;
+        }
         this.lastX = evt.screenX;
         this.lastY = evt.screenY;
         return this._generateEvent(SLIDE_EVENT.MOVED, evt);
     };
     Slide.prototype._generateEvent = function (type, evt) {
-        if (this.startX === null || (this.startX === this.lastX && this.startY === this.lastY)) {
+        if (this.startX === null) {
             return;
         }
         this.slideCallback({

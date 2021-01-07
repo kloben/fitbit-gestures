@@ -45,7 +45,9 @@ export class Slide {
   }
 
   protected _onMouseMove(evt: MouseEvent) {
+    console.log(`${this.lastX}-${evt.screenX} ${this.lastX}-${evt.screenX}`);
     if(this.lastX === evt.screenX && this.lastY === evt.screenY) {
+      console.log('Skip');
       return;
     }
     this.lastX = evt.screenX;
