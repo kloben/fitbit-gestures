@@ -30,6 +30,8 @@ export class Slide {
   protected _onMouseDown(evt: MouseEvent) {
     this.startX = evt.screenX;
     this.startY = evt.screenY;
+    this.lastX = evt.screenX;
+    this.lastY = evt.screenY;
     return this._generateEvent(SLIDE_EVENT.STARTED, evt);
   }
 
@@ -43,13 +45,16 @@ export class Slide {
   }
 
   protected _onMouseMove(evt: MouseEvent) {
+    if(this.lastX === evt.screenX && this.lastY === evt.screenY) {
+      return;
+    }
     this.lastX = evt.screenX;
     this.lastY = evt.screenY;
     return this._generateEvent(SLIDE_EVENT.MOVED, evt);
   }
 
   private _generateEvent(type: SLIDE_EVENT, evt: MouseEvent) {
-    if (this.startX === null || (this.startX === this.lastX && this.startY === this.lastY)) {
+    if (this.startX === null) {
       return;
     }
 
