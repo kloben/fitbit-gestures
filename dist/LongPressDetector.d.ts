@@ -1,6 +1,5 @@
-export interface LongPressConfig {
-}
-export declare class LongPressDetector {
+import { LongPress, LongPressCallback, LongPressConfig } from "./LongPress";
+export declare class LongPressDetector extends LongPress {
     private readonly element;
-    constructor(element: string | Element);
+    constructor(element: string | Element, longPressCallback: LongPressCallback, cfg?: LongPressConfig);
 }
