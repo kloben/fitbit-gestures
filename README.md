@@ -14,6 +14,14 @@ Install the library with `npm i fitbit-gestures` or `yarn add fitbit-gestures`
 
 You must provide an [Element](https://dev.fitbit.com/build/reference/device-api/document/#interface-element) or the ID of an existing element.
 
+This element should have "pointer-events" set to "visible". Will work only on elements which can have this attribute like [RectElements](https://dev.fitbit.com/build/guides/user-interface/svg/#rectangles).
+
+```xml
+<svg>
+  <rect id="detectorElement" pointer-events="visible" />
+</svg>
+```
+
 > **Warning**
 >
 > Keep in mind that only one listener can be attached to each element. Attaching multiple detectors to the same element will overwrite the previous ones. 
@@ -27,7 +35,7 @@ For each gesture, you can customize the detectors. View Single Gesture examples 
 import { GestureDetector, SlideData, SWIPE_DIR } from 'fitbit-gestures';
 
 // Get the element. You can also pass the element ID
-const element = document.getElementById('some_element'); 
+const element = document.getElementById('detectorElement'); 
 
 const detector = new GestureDetector(element)
     .onSwipe((dir: SWIPE_DIR) => {
@@ -52,7 +60,7 @@ If you only need one type of gesture, it will be slightly faster to use a dedica
 import { SwipeDetector, SWIPE_DIR, SwipeConfig } from 'fitbit-gestures';
 
 // Get the element. You can also pass the element ID as string
-const element = document.getElementById('some_element');
+const element = document.getElementById('detectorElement');
 
 //Optional configuration
 const swipeConfig: SwipeConfig = {
@@ -80,7 +88,7 @@ function onSwipe(direction: SWIPE_DIR) {
 import { DoubleTapDetector, DoubleTapConfig } from 'fitbit-gestures';
 
 // Get the element. You can also pass the element ID as string
-const element = document.getElementById('some_element'); 
+const element = document.getElementById('detectorElement'); 
 
 //Optional configuration
 const doubleTapConfig: DoubleTapConfig = {
@@ -106,7 +114,7 @@ function onDoubleTap() {
 import { SlideDetector, SlideData } from 'fitbit-gestures';
 
 // Get the element. You can also pass the element ID as string
-const element = document.getElementById('some_element');
+const element = document.getElementById('detectorElement');
 
 const detector = new SlideDetector(element, onSlide.bind(this));
 
