@@ -14,7 +14,7 @@ Install the library with `npm i fitbit-gestures` or `yarn add fitbit-gestures`
 
 You must provide an [Element](https://dev.fitbit.com/build/reference/device-api/document/#interface-element) or the ID of an existing element.
 
-This element should have "pointer-events" set to "visible". Will work only on elements which can have this attribute like [RectElements](https://dev.fitbit.com/build/guides/user-interface/svg/#rectangles).
+Selected element should have "pointer-events" set to "visible". Will work only on elements which can have this attribute like [RectElements](https://dev.fitbit.com/build/guides/user-interface/svg/#rectangles).
 
 ```xml
 <svg>
