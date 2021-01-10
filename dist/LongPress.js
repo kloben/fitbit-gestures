@@ -7,23 +7,18 @@ var LongPress = /** @class */ (function () {
         this.threshold = (cfg === null || cfg === void 0 ? void 0 : cfg.time) || 10;
     }
     LongPress.prototype._onMouseDown = function (evt) {
-        console.log('DOWN');
         this._init(evt);
     };
     LongPress.prototype._onMouseMove = function (evt) {
-        console.log('MOVE');
-        if (this.executed) {
-            console.log('MOVE skip');
+        if (this.executed || !this.startPos) {
             return;
         }
         if (Math.abs(evt.screenX - this.startPos.x) > this.threshold ||
             Math.abs(evt.screenY - this.startPos.y) > this.threshold) {
-            console.log('MOVE reset');
             this._init(evt);
         }
     };
     LongPress.prototype._onMouseUp = function () {
-        console.log('UP');
         this._reset();
     };
     LongPress.prototype._init = function (evt) {
@@ -39,7 +34,6 @@ var LongPress = /** @class */ (function () {
         this.executed = false;
     };
     LongPress.prototype._execute = function () {
-        console.log('EXECUTE');
         this.executed = true;
         this.longPressCallback();
     };

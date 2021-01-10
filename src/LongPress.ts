@@ -24,27 +24,22 @@ export class LongPress {
   }
 
   protected _onMouseDown(evt: MouseEvent) {
-    console.log('DOWN');
     this._init(evt);
   }
 
   protected _onMouseMove(evt: MouseEvent) {
-    console.log('MOVE');
-    if(this.executed) {
-      console.log('MOVE skip');
+    if(this.executed || !this.startPos) {
       return;
     }
     if(
       Math.abs(evt.screenX - this.startPos.x) > this.threshold ||
       Math.abs(evt.screenY - this.startPos.y) > this.threshold
     ) {
-      console.log('MOVE reset');
       this._init(evt);
     }
   }
 
   protected _onMouseUp() {
-    console.log('UP');
     this._reset();
   }
 
@@ -63,7 +58,6 @@ export class LongPress {
   }
 
   private _execute() {
-    console.log('EXECUTE');
     this.executed = true;
     this.longPressCallback();
   }
