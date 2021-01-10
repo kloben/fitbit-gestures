@@ -8,6 +8,7 @@ var LongPressDetector = /** @class */ (function (_super) {
         _this.element = findElement(element);
         _this.element.onmousedown = _this._onMouseDown.bind(_this);
         _this.element.onmouseup = _this._onMouseUp.bind(_this);
+        _this.element.onmousemove = _this._onMouseMove.bind(_this);
         return _this;
     }
     return LongPressDetector;
