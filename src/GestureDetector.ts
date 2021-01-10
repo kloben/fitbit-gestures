@@ -57,6 +57,7 @@ export class GestureDetector {
     this.longPress = new LongPressPrivate(cb);
     this._addListener('up', this.longPress.onMouseUp.bind(this.slide));
     this._addListener('down', this.longPress.onMouseDown.bind(this.slide));
+    this._addListener('move', this.longPress.onMouseMove.bind(this.slide));
     return this;
   }
 

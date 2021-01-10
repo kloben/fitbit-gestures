@@ -6,11 +6,15 @@ export class LongPressPrivate extends LongPress {
     super(callback, cfg);
   }
 
-  onMouseDown() {
-    super._onMouseDown();
+  onMouseDown(evt: MouseEvent) {
+    super._onMouseDown(evt);
   }
 
   onMouseUp() {
     super._onMouseUp();
+  }
+
+  onMouseMove(evt: MouseEvent) {
+    super._onMouseMove(evt);
   }
 }
