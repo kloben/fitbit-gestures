@@ -1,4 +1,4 @@
-import { SwipeCallback, SwipeConfig } from './Swipe'
+import { SwipeConfig } from './Swipe'
 import { findElement } from './helpers/find-element.helper'
 import { SwipePrivate } from './SwipePrivate'
 import { DoubleTapPrivate } from './DoubleTapPrivate'
@@ -7,6 +7,7 @@ import { SlideCallback } from './Slide'
 import { SlidePrivate } from './SlidePrivate'
 import { LongPressPrivate } from './LongPressPrivate'
 import { LongPressCallback } from './LongPress'
+import { GestureCallback } from './interfaces/gesture-callback.interface'
 
 export interface GestureConfig {
 
@@ -32,7 +33,7 @@ export class GestureDetector {
     return this
   }
 
-  onSwipe (cb: SwipeCallback, cfg?: SwipeConfig) {
+  onSwipe (cb: GestureCallback, cfg?: SwipeConfig) {
     this.swipe = new SwipePrivate(cb, cfg)
     this._addListener('up', this.swipe.onMouseUp.bind(this.swipe))
     this._addListener('down', this.swipe.onMouseDown.bind(this.swipe))

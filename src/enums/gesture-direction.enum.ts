@@ -3,8 +3,8 @@ export enum GESTURE_DIRECTION {
   down = 'down',
   left = 'left',
   right = 'right',
-  up_right = 'up_right',
-  up_left = 'up_left',
-  down_right = 'down_right',
-  down_left = 'down_left',
+  upRight = 'upRight',
+  upLeft = 'upLeft',
+  downRight = 'downRight',
+  downLeft = 'downLeft',
 }

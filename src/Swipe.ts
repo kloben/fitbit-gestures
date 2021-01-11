@@ -1,23 +1,18 @@
+import { GestureCallback } from './interfaces/gesture-callback.interface'
+import { GESTURE_DIRECTION } from './enums/gesture-direction.enum'
+import { GESTURE_TYPE } from './enums/gesture-type.enum'
+
 export interface SwipeConfig {
   threshold: number
 }
 
-export enum SWIPE_DIR {
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT
-}
-
-export type SwipeCallback = (dir: SWIPE_DIR) => any;
-
-export class Swipe {
+export abstract class Swipe {
   private readonly threshold: number
   private initY: number = 0
   private initX: number = 0
 
-  protected constructor (
-    private readonly swipeCallback: SwipeCallback,
+  constructor (
+    private readonly cb: GestureCallback,
     cfg?: SwipeConfig
   ) {
     this.threshold = cfg?.threshold || 100
@@ -29,17 +24,37 @@ export class Swipe {
   }
 
   protected _onMouseUp (evt: MouseEvent) {
-    const x = evt.screenX - this.initX
-    const y = evt.screenY - this.initY
+    if (!this.initX) {
+      return
+    }
+    const dir = this.getDirection(evt.screenX - this.initX, evt.screenY - this.initY)
+    if (dir) {
+      this.cb({
+        type: GESTURE_TYPE.swipe,
+        dir,
+        center: {
+          x: evt.screenX,
+          y: evt.screenY
+        },
+        from: {
+          x: this.initX,
+          y: this.initY
+        }
+      })
+    }
+    this.initX = null
+    this.initY = null
+  }
 
+  private getDirection (x: number, y: number): GESTURE_DIRECTION | void {
     if (y < -this.threshold) {
-      this.swipeCallback(SWIPE_DIR.UP)
+      return GESTURE_DIRECTION.up
     } else if (y > this.threshold) {
-      this.swipeCallback(SWIPE_DIR.DOWN)
+      return GESTURE_DIRECTION.down
     } else if (x < -this.threshold) {
-      this.swipeCallback(SWIPE_DIR.LEFT)
+      return GESTURE_DIRECTION.left
     } else if (x > this.threshold) {
-      this.swipeCallback(SWIPE_DIR.RIGHT)
+      return GESTURE_DIRECTION.right
     }
   }
 }
