@@ -8,8 +8,8 @@ export interface SwipeConfig {
 
 export abstract class Swipe {
   private readonly threshold: number
-  private initY: number = 0
-  private initX: number = 0
+  private initY = 0
+  private initX = 0
 
   constructor (
     private readonly cb: GestureCallback,

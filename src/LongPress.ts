@@ -11,8 +11,8 @@ export abstract class LongPress {
   private readonly minTime: number
   private readonly threshold: number
   private startPos: Point | null
-  private executed: boolean = false
   private timeout: number = null
+  private executed = false
 
   constructor (
     private readonly cb: GestureCallback,

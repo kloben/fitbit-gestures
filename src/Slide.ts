@@ -8,6 +8,7 @@ export abstract class Slide {
   private startY: number = null
   private lastY: number = null
 
+  // eslint-disable-next-line no-useless-constructor
   constructor (
     private readonly cb: GestureCallback
   ) {}
@@ -47,12 +48,12 @@ export abstract class Slide {
       type: GESTURE_TYPE.slide,
       status,
       center: {
-        x: this.startX,
-        y: this.startY
+        x: evt.screenX,
+        y: evt.screenY
       },
       from: {
-        x: this.lastX,
-        y: this.lastY
+        x: this.startX,
+        y: this.startY
       }
     })
   }
