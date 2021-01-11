@@ -14,7 +14,7 @@ Install the library with `npm i fitbit-gestures` or `yarn add fitbit-gestures`
 
 You must provide an [Element](https://dev.fitbit.com/build/reference/device-api/document/#interface-element) or the ID of an existing element.
 
-Selected element should have "pointer-events" set to "visible". Will work only on elements which can have this attribute like [RectElements](https://dev.fitbit.com/build/guides/user-interface/svg/#rectangles).
+The selected element should have "pointer-events" set to "visible". Will work only on elements which can have this attribute like [RectElements](https://dev.fitbit.com/build/guides/user-interface/svg/#rectangles).
 
 ```xml
 <svg>
@@ -122,3 +122,25 @@ function onSlide(data: SlideData) {
   //Do something
 }
 ```
+
+#### LongPress only
+
+```typescript
+import { LongPressDetector } from 'fitbit-gestures';
+
+// Get the element. You can also pass the element ID as string
+const element = document.getElementById('detectorElement');
+
+const detector = new LongPressDetector(element, onLongPress.bind(this));
+
+function onLongPress() {
+  //Do something
+}
+```
+
+##### LongPress configuration (Optional)
+
+| Attribute | Description | Default |
+| --- | :--- | --- |
+| **time** | Minimum time (in ms) required to trigger the event | 300ms
+| **threshold** | Max distance (in px) allowed | 10px
