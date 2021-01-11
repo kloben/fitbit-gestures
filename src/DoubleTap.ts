@@ -5,22 +5,21 @@ export interface DoubleTapConfig {
 export type DoubleTapCallback = () => any;
 
 export class DoubleTap {
-  private readonly interval: number;
-  private lastTap: number | null = null;
+  private readonly interval: number
+  private lastTap: number | null = null
 
-  protected constructor(
+  protected constructor (
     private readonly tapCallback: DoubleTapCallback,
     cfg?: DoubleTapConfig
   ) {
-    this.interval = cfg?.interval || 250;
+    this.interval = cfg?.interval || 250
   }
 
-  protected _onMouseUp() {
-    const now = Date.now();
+  protected _onMouseUp () {
+    const now = Date.now()
     if (now && now - this.lastTap < 250) {
-      this.tapCallback();
+      this.tapCallback()
     }
-    this.lastTap = now;
+    this.lastTap = now
   }
 }
-

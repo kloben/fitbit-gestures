@@ -1,17 +1,11 @@
-import {Swipe, SwipeCallback, SwipeConfig} from "./Swipe";
+import { Swipe } from './Swipe'
 
 export class SwipePrivate extends Swipe {
-
-  constructor(callback: SwipeCallback, cfg?: SwipeConfig) {
-    super(callback, cfg);
+  onMouseDown (evt: MouseEvent) {
+    super._onMouseDown(evt)
   }
 
-  onMouseDown(evt: MouseEvent) {
-    super._onMouseDown(evt);
-  }
-
-  onMouseUp(evt: MouseEvent) {
-    super._onMouseUp(evt);
+  onMouseUp (evt: MouseEvent) {
+    super._onMouseUp(evt)
   }
 }
-
