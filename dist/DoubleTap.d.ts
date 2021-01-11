@@ -6,6 +6,6 @@ export declare class DoubleTap {
     private readonly tapCallback;
     private readonly interval;
     private lastTap;
-    constructor(tapCallback: DoubleTapCallback, cfg?: DoubleTapConfig);
+    protected constructor(tapCallback: DoubleTapCallback, cfg?: DoubleTapConfig);
     protected _onMouseUp(): void;
 }

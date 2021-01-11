@@ -2,6 +2,7 @@ import { findElement } from "./helpers/find-element.helper";
 import { SwipePrivate } from "./SwipePrivate";
 import { DoubleTapPrivate } from "./DoubleTapPrivate";
 import { SlidePrivate } from "./SlidePrivate";
+import { LongPressPrivate } from "./LongPressPrivate";
 var GestureDetector = /** @class */ (function () {
     function GestureDetector(element, cfg) {
         this.callbacks = {
@@ -28,6 +29,13 @@ var GestureDetector = /** @class */ (function () {
         this._addListener('up', this.slide.onMouseUp.bind(this.slide));
         this._addListener('down', this.slide.onMouseDown.bind(this.slide));
         this._addListener('move', this.slide.onMouseMove.bind(this.slide));
+        return this;
+    };
+    GestureDetector.prototype.onLongPress = function (cb) {
+        this.longPress = new LongPressPrivate(cb);
+        this._addListener('up', this.longPress.onMouseUp.bind(this.slide));
+        this._addListener('down', this.longPress.onMouseDown.bind(this.slide));
+        this._addListener('move', this.longPress.onMouseMove.bind(this.slide));
         return this;
     };
     GestureDetector.prototype._addListener = function (gesture, cb) {

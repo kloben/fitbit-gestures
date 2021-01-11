@@ -19,7 +19,7 @@ export declare class Slide {
     private lastX;
     private startY;
     private lastY;
-    constructor(slideCallback: SlideCallback);
+    protected constructor(slideCallback: SlideCallback);
     protected _onMouseDown(evt: MouseEvent): void;
     protected _onMouseUp(evt: MouseEvent): void;
     protected _onMouseMove(evt: MouseEvent): void;
