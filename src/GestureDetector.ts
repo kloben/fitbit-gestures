@@ -6,9 +6,7 @@ import { DoubleTapConfig } from './DoubleTap'
 import { SlidePrivate } from './SlidePrivate'
 import { LongPressPrivate } from './LongPressPrivate'
 import { GestureCallback } from './interfaces/gesture-callback.interface'
-
-export interface GestureConfig {
-}
+import { TapPrivate } from './TapPrivate'
 
 export class GestureDetector {
   private readonly element: Element
@@ -16,6 +14,7 @@ export class GestureDetector {
   private doubleTap: DoubleTapPrivate
   private slide: SlidePrivate
   private longPress: LongPressPrivate
+  private tap: TapPrivate
   private callbacks = {
     up: null,
     down: null,
@@ -23,8 +22,7 @@ export class GestureDetector {
   }
 
   constructor (
-    element: string | Element,
-    cfg?: GestureConfig
+    element: string | Element
   ) {
     this.element = findElement(element)
     return this
@@ -53,13 +51,18 @@ export class GestureDetector {
 
   onLongPress (cb: GestureCallback) {
     this.longPress = new LongPressPrivate(cb)
-    this._addListener('up', this.longPress.onMouseUp.bind(this.slide))
-    this._addListener('down', this.longPress.onMouseDown.bind(this.slide))
-    this._addListener('move', this.longPress.onMouseMove.bind(this.slide))
+    this._addListener('up', this.longPress.onMouseUp.bind(this.longPress))
+    this._addListener('down', this.longPress.onMouseDown.bind(this.longPress))
+    this._addListener('move', this.longPress.onMouseMove.bind(this.longPress))
     return this
   }
 
-  private _addListener (gesture: string, cb: Function) {
+  onTap (cb: GestureCallback) {
+    this.tap = new TapPrivate(cb)
+    this._addListener('up', this.tap.onMouseUp.bind(this.tap))
+  }
+
+  private _addListener (gesture: 'up' | 'down' | 'move', cb: Function) {
     if (!this.callbacks[gesture]) {
       this.callbacks[gesture] = []
       this.element[`onmouse${gesture}`] = (evt: MouseEvent) => {
