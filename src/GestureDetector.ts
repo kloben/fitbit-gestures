@@ -6,7 +6,6 @@ import { DoubleTapConfig } from './DoubleTap'
 import { SlideCallback } from './Slide'
 import { SlidePrivate } from './SlidePrivate'
 import { LongPressPrivate } from './LongPressPrivate'
-import { LongPressCallback } from './LongPress'
 import { GestureCallback } from './interfaces/gesture-callback.interface'
 
 export interface GestureConfig {
@@ -54,7 +53,7 @@ export class GestureDetector {
     return this
   }
 
-  onLongPress (cb: LongPressCallback) {
+  onLongPress (cb: GestureCallback) {
     this.longPress = new LongPressPrivate(cb)
     this._addListener('up', this.longPress.onMouseUp.bind(this.slide))
     this._addListener('down', this.longPress.onMouseDown.bind(this.slide))

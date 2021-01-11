@@ -1,15 +1,16 @@
-import { LongPress, LongPressCallback, LongPressConfig } from './LongPress'
+import { LongPress, LongPressConfig } from './LongPress'
 import { findElement } from './helpers/find-element.helper'
+import { GestureCallback } from './interfaces/gesture-callback.interface'
 
 export class LongPressDetector extends LongPress {
   private readonly element: Element
 
   constructor (
     element: string | Element,
-    longPressCallback: LongPressCallback,
+    cb: GestureCallback,
     cfg?: LongPressConfig
   ) {
-    super(longPressCallback, cfg)
+    super(cb, cfg)
     this.element = findElement(element)
     this.element.onmousedown = this._onMouseDown.bind(this)
     this.element.onmouseup = this._onMouseUp.bind(this)

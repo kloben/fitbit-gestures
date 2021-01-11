@@ -1,21 +1,21 @@
 import { Point } from './interfaces/point.interface'
+import { GestureCallback } from './interfaces/gesture-callback.interface'
+import { GESTURE_TYPE } from './enums/gesture-type.enum'
 
 export interface LongPressConfig {
   time?: number,
   threshold?: number
 }
 
-export type LongPressCallback = () => any;
-
-export class LongPress {
+export abstract class LongPress {
   private readonly minTime: number
   private readonly threshold: number
   private startPos: Point | null
   private executed: boolean = false
   private timeout: number = null
 
-  protected constructor (
-    private readonly longPressCallback: LongPressCallback,
+  constructor (
+    private readonly cb: GestureCallback,
     cfg?: LongPressConfig
   ) {
     this.minTime = cfg?.time || 300
@@ -61,6 +61,9 @@ export class LongPress {
 
   private _execute () {
     this.executed = true
-    this.longPressCallback()
+    this.cb({
+      type: GESTURE_TYPE.longPress,
+      center: this.startPos
+    })
   }
 }
