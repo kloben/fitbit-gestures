@@ -3,13 +3,11 @@ import { findElement } from './helpers/find-element.helper'
 import { SwipePrivate } from './SwipePrivate'
 import { DoubleTapPrivate } from './DoubleTapPrivate'
 import { DoubleTapConfig } from './DoubleTap'
-import { SlideCallback } from './Slide'
 import { SlidePrivate } from './SlidePrivate'
 import { LongPressPrivate } from './LongPressPrivate'
 import { GestureCallback } from './interfaces/gesture-callback.interface'
 
 export interface GestureConfig {
-
 }
 
 export class GestureDetector {
@@ -45,7 +43,7 @@ export class GestureDetector {
     return this
   }
 
-  onSlide (cb: SlideCallback) {
+  onSlide (cb: GestureCallback) {
     this.slide = new SlidePrivate(cb)
     this._addListener('up', this.slide.onMouseUp.bind(this.slide))
     this._addListener('down', this.slide.onMouseDown.bind(this.slide))

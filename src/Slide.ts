@@ -1,43 +1,27 @@
-export enum SLIDE_EVENT {
-  STARTED = 'STARTED',
-  MOVED = 'MOVED',
-  ENDED = 'ENDED'
-}
+import { GestureCallback } from './interfaces/gesture-callback.interface'
+import { GESTURE_TYPE } from './enums/gesture-type.enum'
+import { GESTURE_STATUS } from './enums/gesture-status.enum'
 
-export interface MovementData {
-  from: number,
-  to: number
-}
-
-export interface SlideData {
-  type: SLIDE_EVENT,
-  x: MovementData,
-  y: MovementData
-}
-
-export type SlideCallback = (data: SlideData) => any;
-
-export class Slide {
+export abstract class Slide {
   private startX: number = null
   private lastX: number = null
   private startY: number = null
   private lastY: number = null
 
-  protected constructor (
-    private readonly slideCallback: SlideCallback
-  ) {
-  }
+  constructor (
+    private readonly cb: GestureCallback
+  ) {}
 
   protected _onMouseDown (evt: MouseEvent) {
     this.startX = evt.screenX
     this.startY = evt.screenY
     this.lastX = evt.screenX
     this.lastY = evt.screenY
-    return this._generateEvent(SLIDE_EVENT.STARTED, evt)
+    return this._generateEvent(GESTURE_STATUS.STARTED, evt)
   }
 
   protected _onMouseUp (evt: MouseEvent) {
-    const data = this._generateEvent(SLIDE_EVENT.ENDED, evt)
+    const data = this._generateEvent(GESTURE_STATUS.ENDED, evt)
     this.startX = null
     this.startY = null
     this.lastX = null
@@ -51,23 +35,24 @@ export class Slide {
     }
     this.lastX = evt.screenX
     this.lastY = evt.screenY
-    return this._generateEvent(SLIDE_EVENT.MOVED, evt)
+    return this._generateEvent(GESTURE_STATUS.MOVED, evt)
   }
 
-  private _generateEvent (type: SLIDE_EVENT, evt: MouseEvent) {
+  private _generateEvent (status: GESTURE_STATUS, evt: MouseEvent) {
     if (this.startX === null) {
       return
     }
 
-    this.slideCallback({
-      type,
-      x: {
-        from: this.startX,
-        to: evt.screenX
+    this.cb({
+      type: GESTURE_TYPE.slide,
+      status,
+      center: {
+        x: this.startX,
+        y: this.startY
       },
-      y: {
-        from: this.startY,
-        to: evt.screenY
+      from: {
+        x: this.lastX,
+        y: this.lastY
       }
     })
   }
