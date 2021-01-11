@@ -1,8 +1,8 @@
-import { findElement } from "./helpers/find-element.helper";
-import { SwipePrivate } from "./SwipePrivate";
-import { DoubleTapPrivate } from "./DoubleTapPrivate";
-import { SlidePrivate } from "./SlidePrivate";
-import { LongPressPrivate } from "./LongPressPrivate";
+import { findElement } from './helpers/find-element.helper';
+import { SwipePrivate } from './SwipePrivate';
+import { DoubleTapPrivate } from './DoubleTapPrivate';
+import { SlidePrivate } from './SlidePrivate';
+import { LongPressPrivate } from './LongPressPrivate';
 var GestureDetector = /** @class */ (function () {
     function GestureDetector(element, cfg) {
         this.callbacks = {

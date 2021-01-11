@@ -1,13 +1,8 @@
-export var SWIPE_DIR;
-(function (SWIPE_DIR) {
-    SWIPE_DIR[SWIPE_DIR["UP"] = 0] = "UP";
-    SWIPE_DIR[SWIPE_DIR["DOWN"] = 1] = "DOWN";
-    SWIPE_DIR[SWIPE_DIR["LEFT"] = 2] = "LEFT";
-    SWIPE_DIR[SWIPE_DIR["RIGHT"] = 3] = "RIGHT";
-})(SWIPE_DIR || (SWIPE_DIR = {}));
+import { GESTURE_DIRECTION } from './enums/gesture-direction.enum';
+import { GESTURE_TYPE } from './enums/gesture-type.enum';
 var Swipe = /** @class */ (function () {
-    function Swipe(swipeCallback, cfg) {
-        this.swipeCallback = swipeCallback;
+    function Swipe(cb, cfg) {
+        this.cb = cb;
         this.initY = 0;
         this.initX = 0;
         this.threshold = (cfg === null || cfg === void 0 ? void 0 : cfg.threshold) || 100;
@@ -17,19 +12,39 @@ var Swipe = /** @class */ (function () {
         this.initX = evt.screenX;
     };
     Swipe.prototype._onMouseUp = function (evt) {
-        var x = evt.screenX - this.initX;
-        var y = evt.screenY - this.initY;
+        if (!this.initX) {
+            return;
+        }
+        var dir = this.getDirection(evt.screenX - this.initX, evt.screenY - this.initY);
+        if (dir) {
+            this.cb({
+                type: GESTURE_TYPE.swipe,
+                dir: dir,
+                center: {
+                    x: evt.screenX,
+                    y: evt.screenY
+                },
+                from: {
+                    x: this.initX,
+                    y: this.initY
+                }
+            });
+        }
+        this.initX = null;
+        this.initY = null;
+    };
+    Swipe.prototype.getDirection = function (x, y) {
         if (y < -this.threshold) {
-            this.swipeCallback(SWIPE_DIR.UP);
+            return GESTURE_DIRECTION.up;
         }
         else if (y > this.threshold) {
-            this.swipeCallback(SWIPE_DIR.DOWN);
+            return GESTURE_DIRECTION.down;
         }
         else if (x < -this.threshold) {
-            this.swipeCallback(SWIPE_DIR.LEFT);
+            return GESTURE_DIRECTION.left;
         }
         else if (x > this.threshold) {
-            this.swipeCallback(SWIPE_DIR.RIGHT);
+            return GESTURE_DIRECTION.right;
         }
     };
     return Swipe;

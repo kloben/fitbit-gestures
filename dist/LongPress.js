@@ -1,6 +1,7 @@
+import { GESTURE_TYPE } from './enums/gesture-type.enum';
 var LongPress = /** @class */ (function () {
-    function LongPress(longPressCallback, cfg) {
-        this.longPressCallback = longPressCallback;
+    function LongPress(cb, cfg) {
+        this.cb = cb;
         this.executed = false;
         this.timeout = null;
         this.minTime = (cfg === null || cfg === void 0 ? void 0 : cfg.time) || 300;
@@ -24,7 +25,10 @@ var LongPress = /** @class */ (function () {
     LongPress.prototype._init = function (evt) {
         this._reset();
         this.timeout = setTimeout(this._execute.bind(this), this.minTime);
-        this.startPos = { x: evt.screenX, y: evt.screenY };
+        this.startPos = {
+            x: evt.screenX,
+            y: evt.screenY
+        };
     };
     LongPress.prototype._reset = function () {
         if (this.timeout) {
@@ -35,7 +39,10 @@ var LongPress = /** @class */ (function () {
     };
     LongPress.prototype._execute = function () {
         this.executed = true;
-        this.longPressCallback();
+        this.cb({
+            type: GESTURE_TYPE.longPress,
+            center: this.startPos
+        });
     };
     return LongPress;
 }());

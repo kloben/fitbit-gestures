@@ -1,12 +1,12 @@
 import { __extends } from "tslib";
-import { DoubleTap } from "./DoubleTap";
+import { DoubleTap } from './DoubleTap';
 var DoubleTapPrivate = /** @class */ (function (_super) {
     __extends(DoubleTapPrivate, _super);
-    function DoubleTapPrivate(callback, cfg) {
-        return _super.call(this, callback, cfg) || this;
+    function DoubleTapPrivate() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    DoubleTapPrivate.prototype.onMouseUp = function () {
-        _super.prototype._onMouseUp.call(this);
+    DoubleTapPrivate.prototype.onMouseUp = function (evt) {
+        _super.prototype._onMouseUp.call(this, evt);
     };
     return DoubleTapPrivate;
 }(DoubleTap));

@@ -1,9 +1,9 @@
 import { __extends } from "tslib";
-import { Swipe } from "./Swipe";
+import { Swipe } from './Swipe';
 var SwipePrivate = /** @class */ (function (_super) {
     __extends(SwipePrivate, _super);
-    function SwipePrivate(callback, cfg) {
-        return _super.call(this, callback, cfg) || this;
+    function SwipePrivate() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     SwipePrivate.prototype.onMouseDown = function (evt) {
         _super.prototype._onMouseDown.call(this, evt);

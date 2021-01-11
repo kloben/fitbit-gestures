@@ -1,4 +1,4 @@
-import document from "document";
+import document from 'document';
 export function findElement(element) {
     var el;
     if (typeof element === 'string') {

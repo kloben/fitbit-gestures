@@ -1,7 +1,6 @@
-import { SwipeCallback, SwipeConfig } from "./Swipe";
-import { DoubleTapCallback, DoubleTapConfig } from "./DoubleTap";
-import { SlideCallback } from "./Slide";
-import { LongPressCallback } from "./LongPress";
+import { SwipeConfig } from './Swipe';
+import { DoubleTapConfig } from './DoubleTap';
+import { GestureCallback } from './interfaces/gesture-callback.interface';
 export interface GestureConfig {
 }
 export declare class GestureDetector {
@@ -12,9 +11,9 @@ export declare class GestureDetector {
     private longPress;
     private callbacks;
     constructor(element: string | Element, cfg?: GestureConfig);
-    onSwipe(cb: SwipeCallback, cfg?: SwipeConfig): this;
-    onDoubleTap(cb: DoubleTapCallback, cfg?: DoubleTapConfig): this;
-    onSlide(cb: SlideCallback): this;
-    onLongPress(cb: LongPressCallback): this;
+    onSwipe(cb: GestureCallback, cfg?: SwipeConfig): this;
+    onDoubleTap(cb: GestureCallback, cfg?: DoubleTapConfig): this;
+    onSlide(cb: GestureCallback): this;
+    onLongPress(cb: GestureCallback): this;
     private _addListener;
 }

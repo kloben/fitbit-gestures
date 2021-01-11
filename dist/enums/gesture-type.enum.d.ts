@@ -1,4 +1,4 @@
-export declare enum EVENT_TYPE {
+export declare enum GESTURE_TYPE {
     tap = "tap",
     doubleTap = "doubleTap",
     longPress = "longPress",

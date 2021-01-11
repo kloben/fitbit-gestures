@@ -1,9 +1,9 @@
 import { __extends } from "tslib";
-import { LongPress } from "./LongPress";
+import { LongPress } from './LongPress';
 var LongPressPrivate = /** @class */ (function (_super) {
     __extends(LongPressPrivate, _super);
-    function LongPressPrivate(callback, cfg) {
-        return _super.call(this, callback, cfg) || this;
+    function LongPressPrivate() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     LongPressPrivate.prototype.onMouseDown = function (evt) {
         _super.prototype._onMouseDown.call(this, evt);

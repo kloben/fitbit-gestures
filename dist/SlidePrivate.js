@@ -1,9 +1,9 @@
 import { __extends } from "tslib";
-import { Slide } from "./Slide";
+import { Slide } from './Slide';
 var SlidePrivate = /** @class */ (function (_super) {
     __extends(SlidePrivate, _super);
-    function SlidePrivate(callback) {
-        return _super.call(this, callback) || this;
+    function SlidePrivate() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     SlidePrivate.prototype.onMouseDown = function (evt) {
         _super.prototype._onMouseDown.call(this, evt);
