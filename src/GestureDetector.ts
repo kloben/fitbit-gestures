@@ -2,7 +2,7 @@ import { SwipeConfig } from './Swipe'
 import { findElement } from './helpers/find-element.helper'
 import { SwipePrivate } from './SwipePrivate'
 import { DoubleTapPrivate } from './DoubleTapPrivate'
-import { DoubleTapCallback, DoubleTapConfig } from './DoubleTap'
+import { DoubleTapConfig } from './DoubleTap'
 import { SlideCallback } from './Slide'
 import { SlidePrivate } from './SlidePrivate'
 import { LongPressPrivate } from './LongPressPrivate'
@@ -40,7 +40,7 @@ export class GestureDetector {
     return this
   }
 
-  onDoubleTap (cb: DoubleTapCallback, cfg?: DoubleTapConfig) {
+  onDoubleTap (cb: GestureCallback, cfg?: DoubleTapConfig) {
     this.doubleTap = new DoubleTapPrivate(cb, cfg)
     this._addListener('up', this.doubleTap.onMouseUp.bind(this.doubleTap))
     return this

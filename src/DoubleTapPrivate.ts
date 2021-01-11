@@ -1,7 +1,7 @@
 import { DoubleTap } from './DoubleTap'
 
 export class DoubleTapPrivate extends DoubleTap {
-  onMouseUp () {
-    super._onMouseUp()
+  onMouseUp (evt: MouseEvent) {
+    super._onMouseUp(evt)
   }
 }
