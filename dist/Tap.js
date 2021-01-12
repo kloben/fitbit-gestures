@@ -4,7 +4,7 @@ var Tap = /** @class */ (function () {
     function Tap(cb) {
         this.cb = cb;
     }
-    Tap.prototype._onMouseUp = function (evt) {
+    Tap.prototype._onMouseDown = function (evt) {
         this.cb({
             type: GestureType.Tap,
             point: {

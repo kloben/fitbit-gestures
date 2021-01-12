@@ -8,7 +8,7 @@ export abstract class Tap {
   ) {
   }
 
-  protected _onMouseUp (evt: MouseEvent) {
+  protected _onMouseDown (evt: MouseEvent) {
     this.cb({
       type: GestureType.Tap,
       point: {

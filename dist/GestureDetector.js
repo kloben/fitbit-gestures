@@ -16,7 +16,7 @@ var GestureDetector = /** @class */ (function () {
     }
     GestureDetector.prototype.onTap = function (cb) {
         this.tap = new TapPrivate(cb);
-        this._addListener('up', this.tap.onMouseUp.bind(this.tap));
+        this._addListener('down', this.tap.onMouseDown.bind(this.tap));
     };
     GestureDetector.prototype.onDoubleTap = function (cb, cfg) {
         this.doubleTap = new DoubleTapPrivate(cb, cfg);

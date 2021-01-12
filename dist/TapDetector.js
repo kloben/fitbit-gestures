@@ -6,7 +6,7 @@ var TapDetector = /** @class */ (function (_super) {
     function TapDetector(element, cb) {
         var _this = _super.call(this, cb) || this;
         _this.element = findElement(element);
-        _this.element.onmouseup = _this._onMouseUp.bind(_this);
+        _this.element.onmousedown = _this._onMouseDown.bind(_this);
         return _this;
     }
     return TapDetector;
