@@ -34,7 +34,8 @@ export abstract class LongPress {
       Math.abs(evt.screenX - this.startPos.x) > this.threshold ||
       Math.abs(evt.screenY - this.startPos.y) > this.threshold
     ) {
-      this._init(evt)
+      this.executed = true
+      this._reset()
     }
   }
 
