@@ -1,46 +1,60 @@
+import { GestureCallback } from './interfaces/gesture-callback.interface'
+import { GestureDirection } from './enums/gesture-direction.enum'
+import { GestureType } from './enums/gesture-type.enum'
+
 export interface SwipeConfig {
   threshold: number
 }
 
-export enum SWIPE_DIR {
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT
-}
+export abstract class Swipe {
+  private readonly threshold: number
+  private initY = 0
+  private initX = 0
 
-export type SwipeCallback = (dir: SWIPE_DIR) => any;
-
-export class Swipe {
-  private readonly threshold: number;
-  private initY: number = 0;
-  private initX: number = 0;
-
-  protected constructor(
-    private readonly swipeCallback: SwipeCallback,
+  constructor (
+    private readonly cb: GestureCallback,
     cfg?: SwipeConfig
   ) {
-    this.threshold = cfg?.threshold || 100;
+    this.threshold = cfg?.threshold || 100
   }
 
-  protected _onMouseDown(evt: MouseEvent) {
-    this.initY = evt.screenY;
-    this.initX = evt.screenX;
+  protected _onMouseDown (evt: MouseEvent) {
+    this.initY = evt.screenY
+    this.initX = evt.screenX
   }
 
-  protected _onMouseUp(evt: MouseEvent) {
-    let x = evt.screenX - this.initX;
-    let y = evt.screenY - this.initY;
+  protected _onMouseUp (evt: MouseEvent) {
+    if (!this.initX) {
+      return
+    }
+    const dir = this.getDirection(evt.screenX - this.initX, evt.screenY - this.initY)
+    if (dir) {
+      this.cb({
+        type: GestureType.Swipe,
+        dir,
+        point: {
+          x: evt.screenX,
+          y: evt.screenY
+        },
+        from: {
+          x: this.initX,
+          y: this.initY
+        }
+      })
+    }
+    this.initX = null
+    this.initY = null
+  }
 
+  private getDirection (x: number, y: number): GestureDirection | void {
     if (y < -this.threshold) {
-      this.swipeCallback(SWIPE_DIR.UP);
+      return GestureDirection.Up
     } else if (y > this.threshold) {
-      this.swipeCallback(SWIPE_DIR.DOWN);
+      return GestureDirection.Down
     } else if (x < -this.threshold) {
-      this.swipeCallback(SWIPE_DIR.LEFT);
+      return GestureDirection.Left
     } else if (x > this.threshold) {
-      this.swipeCallback(SWIPE_DIR.RIGHT);
+      return GestureDirection.Right
     }
   }
 }
-

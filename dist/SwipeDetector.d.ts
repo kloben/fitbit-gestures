@@ -1,5 +1,6 @@
-import { Swipe, SwipeCallback, SwipeConfig } from "./Swipe";
+import { Swipe, SwipeConfig } from './Swipe';
+import { GestureCallback } from './interfaces/gesture-callback.interface';
 export declare class SwipeDetector extends Swipe {
     private readonly element;
-    constructor(element: string | Element, swipeCallback: SwipeCallback, cfg?: SwipeConfig);
+    constructor(element: string | Element, cb: GestureCallback, cfg?: SwipeConfig);
 }

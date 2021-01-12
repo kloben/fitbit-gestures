@@ -1,16 +1,16 @@
+import { GestureCallback } from './interfaces/gesture-callback.interface';
 export interface LongPressConfig {
     time?: number;
     threshold?: number;
 }
-export declare type LongPressCallback = () => any;
-export declare class LongPress {
-    private readonly longPressCallback;
+export declare abstract class LongPress {
+    private readonly cb;
     private readonly minTime;
     private readonly threshold;
     private startPos;
-    private executed;
     private timeout;
-    protected constructor(longPressCallback: LongPressCallback, cfg?: LongPressConfig);
+    private executed;
+    constructor(cb: GestureCallback, cfg?: LongPressConfig);
     protected _onMouseDown(evt: MouseEvent): void;
     protected _onMouseMove(evt: MouseEvent): void;
     protected _onMouseUp(): void;

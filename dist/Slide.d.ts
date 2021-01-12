@@ -1,25 +1,11 @@
-export declare enum SLIDE_EVENT {
-    STARTED = "STARTED",
-    MOVED = "MOVED",
-    ENDED = "ENDED"
-}
-export interface SlideData {
-    type: SLIDE_EVENT;
-    x: MovementData;
-    y: MovementData;
-}
-export interface MovementData {
-    from: number;
-    to: number;
-}
-export declare type SlideCallback = (data: SlideData) => any;
-export declare class Slide {
-    private readonly slideCallback;
+import { GestureCallback } from './interfaces/gesture-callback.interface';
+export declare abstract class Slide {
+    private readonly cb;
     private startX;
     private lastX;
     private startY;
     private lastY;
-    protected constructor(slideCallback: SlideCallback);
+    constructor(cb: GestureCallback);
     protected _onMouseDown(evt: MouseEvent): void;
     protected _onMouseUp(evt: MouseEvent): void;
     protected _onMouseMove(evt: MouseEvent): void;

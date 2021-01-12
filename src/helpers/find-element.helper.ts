@@ -1,14 +1,14 @@
-import document from "document";
+import document from 'document'
 
-export function findElement(element: string | Element): Element {
-  let el;
+export function findElement (element: string | Element): Element {
+  let el
   if (typeof element === 'string') {
-    el = document.getElementById(element);
+    el = document.getElementById(element)
   } else {
-    el = element;
+    el = element
   }
   if (!el) {
-    throw new Error('Element not found');
+    throw new Error('Element not found')
   }
-  return el;
+  return el
 }

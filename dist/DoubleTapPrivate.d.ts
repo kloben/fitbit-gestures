@@ -1,5 +1,4 @@
-import { DoubleTap, DoubleTapCallback, DoubleTapConfig } from "./DoubleTap";
+import { DoubleTap } from './DoubleTap';
 export declare class DoubleTapPrivate extends DoubleTap {
-    constructor(callback: DoubleTapCallback, cfg?: DoubleTapConfig);
-    onMouseUp(): void;
+    onMouseUp(evt: MouseEvent): void;
 }

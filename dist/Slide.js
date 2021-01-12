@@ -1,12 +1,9 @@
-export var SLIDE_EVENT;
-(function (SLIDE_EVENT) {
-    SLIDE_EVENT["STARTED"] = "STARTED";
-    SLIDE_EVENT["MOVED"] = "MOVED";
-    SLIDE_EVENT["ENDED"] = "ENDED";
-})(SLIDE_EVENT || (SLIDE_EVENT = {}));
+import { GestureType } from './enums/gesture-type.enum';
+import { GestureStatus } from './enums/gesture-status.enum';
 var Slide = /** @class */ (function () {
-    function Slide(slideCallback) {
-        this.slideCallback = slideCallback;
+    // eslint-disable-next-line no-useless-constructor
+    function Slide(cb) {
+        this.cb = cb;
         this.startX = null;
         this.lastX = null;
         this.startY = null;
@@ -17,10 +14,10 @@ var Slide = /** @class */ (function () {
         this.startY = evt.screenY;
         this.lastX = evt.screenX;
         this.lastY = evt.screenY;
-        return this._generateEvent(SLIDE_EVENT.STARTED, evt);
+        return this._generateEvent(GestureStatus.Started, evt);
     };
     Slide.prototype._onMouseUp = function (evt) {
-        var data = this._generateEvent(SLIDE_EVENT.ENDED, evt);
+        var data = this._generateEvent(GestureStatus.Ended, evt);
         this.startX = null;
         this.startY = null;
         this.lastX = null;
@@ -33,21 +30,22 @@ var Slide = /** @class */ (function () {
         }
         this.lastX = evt.screenX;
         this.lastY = evt.screenY;
-        return this._generateEvent(SLIDE_EVENT.MOVED, evt);
+        return this._generateEvent(GestureStatus.Moved, evt);
     };
-    Slide.prototype._generateEvent = function (type, evt) {
+    Slide.prototype._generateEvent = function (status, evt) {
         if (this.startX === null) {
             return;
         }
-        this.slideCallback({
-            type: type,
-            x: {
-                from: this.startX,
-                to: evt.screenX
+        this.cb({
+            type: GestureType.Slide,
+            status: status,
+            point: {
+                x: evt.screenX,
+                y: evt.screenY
             },
-            y: {
-                from: this.startY,
-                to: evt.screenY
+            from: {
+                x: this.startX,
+                y: this.startY
             }
         });
     };

@@ -1,11 +1,11 @@
+import { GestureCallback } from './interfaces/gesture-callback.interface';
 export interface DoubleTapConfig {
     interval: number;
 }
-export declare type DoubleTapCallback = () => any;
-export declare class DoubleTap {
-    private readonly tapCallback;
+export declare abstract class DoubleTap {
+    private readonly cb;
     private readonly interval;
     private lastTap;
-    protected constructor(tapCallback: DoubleTapCallback, cfg?: DoubleTapConfig);
-    protected _onMouseUp(): void;
+    constructor(cb: GestureCallback, cfg?: DoubleTapConfig);
+    protected _onMouseUp(evt: MouseEvent): void;
 }
