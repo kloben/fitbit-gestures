@@ -1,6 +1,6 @@
 import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GESTURE_TYPE } from './enums/gesture-type.enum'
-import { GESTURE_STATUS } from './enums/gesture-status.enum'
+import { GestureType } from './enums/gesture-type.enum'
+import { GestureStatus } from './enums/gesture-status.enum'
 
 export abstract class Slide {
   private startX: number = null
@@ -18,11 +18,11 @@ export abstract class Slide {
     this.startY = evt.screenY
     this.lastX = evt.screenX
     this.lastY = evt.screenY
-    return this._generateEvent(GESTURE_STATUS.STARTED, evt)
+    return this._generateEvent(GestureStatus.Started, evt)
   }
 
   protected _onMouseUp (evt: MouseEvent) {
-    const data = this._generateEvent(GESTURE_STATUS.ENDED, evt)
+    const data = this._generateEvent(GestureStatus.Ended, evt)
     this.startX = null
     this.startY = null
     this.lastX = null
@@ -36,18 +36,18 @@ export abstract class Slide {
     }
     this.lastX = evt.screenX
     this.lastY = evt.screenY
-    return this._generateEvent(GESTURE_STATUS.MOVED, evt)
+    return this._generateEvent(GestureStatus.Moved, evt)
   }
 
-  private _generateEvent (status: GESTURE_STATUS, evt: MouseEvent) {
+  private _generateEvent (status: GestureStatus, evt: MouseEvent) {
     if (this.startX === null) {
       return
     }
 
     this.cb({
-      type: GESTURE_TYPE.slide,
+      type: GestureType.Slide,
       status,
-      center: {
+      point: {
         x: evt.screenX,
         y: evt.screenY
       },

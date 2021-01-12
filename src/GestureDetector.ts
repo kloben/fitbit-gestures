@@ -28,24 +28,14 @@ export class GestureDetector {
     return this
   }
 
-  onSwipe (cb: GestureCallback, cfg?: SwipeConfig) {
-    this.swipe = new SwipePrivate(cb, cfg)
-    this._addListener('up', this.swipe.onMouseUp.bind(this.swipe))
-    this._addListener('down', this.swipe.onMouseDown.bind(this.swipe))
-    return this
+  onTap (cb: GestureCallback) {
+    this.tap = new TapPrivate(cb)
+    this._addListener('up', this.tap.onMouseUp.bind(this.tap))
   }
 
   onDoubleTap (cb: GestureCallback, cfg?: DoubleTapConfig) {
     this.doubleTap = new DoubleTapPrivate(cb, cfg)
     this._addListener('up', this.doubleTap.onMouseUp.bind(this.doubleTap))
-    return this
-  }
-
-  onSlide (cb: GestureCallback) {
-    this.slide = new SlidePrivate(cb)
-    this._addListener('up', this.slide.onMouseUp.bind(this.slide))
-    this._addListener('down', this.slide.onMouseDown.bind(this.slide))
-    this._addListener('move', this.slide.onMouseMove.bind(this.slide))
     return this
   }
 
@@ -57,9 +47,19 @@ export class GestureDetector {
     return this
   }
 
-  onTap (cb: GestureCallback) {
-    this.tap = new TapPrivate(cb)
-    this._addListener('up', this.tap.onMouseUp.bind(this.tap))
+  onSwipe (cb: GestureCallback, cfg?: SwipeConfig) {
+    this.swipe = new SwipePrivate(cb, cfg)
+    this._addListener('up', this.swipe.onMouseUp.bind(this.swipe))
+    this._addListener('down', this.swipe.onMouseDown.bind(this.swipe))
+    return this
+  }
+
+  onSlide (cb: GestureCallback) {
+    this.slide = new SlidePrivate(cb)
+    this._addListener('up', this.slide.onMouseUp.bind(this.slide))
+    this._addListener('down', this.slide.onMouseDown.bind(this.slide))
+    this._addListener('move', this.slide.onMouseMove.bind(this.slide))
+    return this
   }
 
   private _addListener (gesture: 'up' | 'down' | 'move', cb: Function) {

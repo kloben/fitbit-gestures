@@ -1,12 +1,12 @@
 import { Point } from './point.interface'
-import { GESTURE_DIRECTION } from '../enums/gesture-direction.enum'
-import { GESTURE_TYPE } from '../enums/gesture-type.enum'
-import { GESTURE_STATUS } from '../enums/gesture-status.enum'
+import { GestureDirection } from '../enums/gesture-direction.enum'
+import { GestureType } from '../enums/gesture-type.enum'
+import { GestureStatus } from '../enums/gesture-status.enum'
 
 export interface GestureEvent {
-  type: GESTURE_TYPE,
-  center: Point,
+  type: GestureType,
+  point: Point,
   from?: Point,
-  dir?: GESTURE_DIRECTION,
-  status?: GESTURE_STATUS
+  dir?: GestureDirection,
+  status?: GestureStatus
 }

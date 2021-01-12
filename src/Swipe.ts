@@ -1,6 +1,6 @@
 import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GESTURE_DIRECTION } from './enums/gesture-direction.enum'
-import { GESTURE_TYPE } from './enums/gesture-type.enum'
+import { GestureDirection } from './enums/gesture-direction.enum'
+import { GestureType } from './enums/gesture-type.enum'
 
 export interface SwipeConfig {
   threshold: number
@@ -30,9 +30,9 @@ export abstract class Swipe {
     const dir = this.getDirection(evt.screenX - this.initX, evt.screenY - this.initY)
     if (dir) {
       this.cb({
-        type: GESTURE_TYPE.swipe,
+        type: GestureType.Swipe,
         dir,
-        center: {
+        point: {
           x: evt.screenX,
           y: evt.screenY
         },
@@ -46,15 +46,15 @@ export abstract class Swipe {
     this.initY = null
   }
 
-  private getDirection (x: number, y: number): GESTURE_DIRECTION | void {
+  private getDirection (x: number, y: number): GestureDirection | void {
     if (y < -this.threshold) {
-      return GESTURE_DIRECTION.up
+      return GestureDirection.Up
     } else if (y > this.threshold) {
-      return GESTURE_DIRECTION.down
+      return GestureDirection.Down
     } else if (x < -this.threshold) {
-      return GESTURE_DIRECTION.left
+      return GestureDirection.Left
     } else if (x > this.threshold) {
-      return GESTURE_DIRECTION.right
+      return GestureDirection.Right
     }
   }
 }

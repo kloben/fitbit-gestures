@@ -1,6 +1,6 @@
 import { Point } from './interfaces/point.interface'
 import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GESTURE_TYPE } from './enums/gesture-type.enum'
+import { GestureType } from './enums/gesture-type.enum'
 
 export interface LongPressConfig {
   time?: number,
@@ -62,8 +62,8 @@ export abstract class LongPress {
   private _execute () {
     this.executed = true
     this.cb({
-      type: GESTURE_TYPE.longPress,
-      center: this.startPos
+      type: GestureType.LongPress,
+      point: this.startPos
     })
   }
 }

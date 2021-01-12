@@ -1,5 +1,5 @@
 import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GESTURE_TYPE } from './enums/gesture-type.enum'
+import { GestureType } from './enums/gesture-type.enum'
 
 export interface DoubleTapConfig {
   interval: number
@@ -20,8 +20,8 @@ export abstract class DoubleTap {
     const now = Date.now()
     if (now && now - this.lastTap < 250) {
       this.cb({
-        type: GESTURE_TYPE.doubleTap,
-        center: {
+        type: GestureType.DoubleTap,
+        point: {
           x: evt.screenX,
           y: evt.screenY
         }

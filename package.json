@@ -5,7 +5,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "rm -r ./dist && tsc"
+    "build": "rm -r ./dist && tsc",
+    "lint": "eslint src/**/*.ts"
   },
   "author": "Valga Medios",
   "license": "ISC",

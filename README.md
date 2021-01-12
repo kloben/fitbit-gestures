@@ -1,20 +1,20 @@
 # Gestures for Fitbit
 
-This library allows you to detect different gestures in Fitbit apps. Tested only on Fitbit SDK 5.0
+This library allows you to detect different gestures in Fitbit devices. Tested only on Fitbit SDK 5.0
 
 ## Installation
 
 Install the library with `npm i fitbit-gestures` or `yarn add fitbit-gestures` 
 
-## Gestures
+## Available gestures
 
-**Swipe, Double Tap, Slide** (More gestures soon) 
+**Tap, Double Tap, Long Press, Swipe, Slide**
 
 ## Usage
 
 You must provide an [Element](https://dev.fitbit.com/build/reference/device-api/document/#interface-element) or the ID of an existing element.
 
-The selected element should have "pointer-events" set to "visible". Will work only on elements which can have this attribute like [RectElements](https://dev.fitbit.com/build/guides/user-interface/svg/#rectangles).
+The selected element should have "pointer-events" set to "visible". Will work only on elements which can have this attribute, like [RectElements](https://dev.fitbit.com/build/guides/user-interface/svg/#rectangles).
 
 ```xml
 <svg>
@@ -24,121 +24,138 @@ The selected element should have "pointer-events" set to "visible". Will work on
 
 > **Warning**
 >
-> Keep in mind that only one listener can be attached to each element. Attaching multiple detectors to the same element will overwrite the previous ones. 
+> Keep in mind that only one gesture listener can be attached to each element. Attaching multiple detectors to the same element will overwrite the previous ones. 
 
 
 ### Gesture Detector
 
-For each gesture, you can customize the detectors. View Single Gesture examples below.
+For some gestures, you can customize the detectors. View Single Gesture configuration below.
 
 ```typescript
-import { GestureDetector, SlideData, SWIPE_DIR } from 'fitbit-gestures';
+import { GestureDetector, GestureEvent } from 'fitbit-gestures';
 
 // Get the element. You can also pass the element ID
 const element = document.getElementById('detectorElement'); 
 
 const detector = new GestureDetector(element)
-    .onSwipe((dir: SWIPE_DIR) => {
+    .onTap((event: GestureEvent) => {
       //Do something
     })
-    .onDoubleTap(() => {
+    .onDoubleTap((event: GestureEvent) => {
       //Do something
     })
-    .onSlide((data: SlideData) => {
+    .onLongPress((event: GestureEvent) => {
+      //Do something
+    })
+    .onSlide((event: GestureEvent) => {
+      //Do something
+    })
+    .onSwipe((event: GestureEvent) => {
       //Do something
     });
 ```
 
+### Events
 
-#### Single gesture detectors
-
-If you only need one type of gesture, it will be slightly faster to use a dedicated class. 
-
-#### Swipe only
+All detectors will return a **GestureEvent** in the callback function
 
 ```typescript
-import { SwipeDetector, SWIPE_DIR, SwipeConfig } from 'fitbit-gestures';
+interface GestureEvent {
+  type: GestureType,
+  point: Point,
+  from?: Point,                   //Swipe & Slide only
+  dir?: GestureDirection,         //Swipe only
+  status?: GestureStatus          //Slide only
+}
+```
 
-// Get the element. You can also pass the element ID as string
-const element = document.getElementById('detectorElement');
+##### Point
+```typescript
+interface Point {
+  x: number,
+  y: number
+}
+```
 
-//Optional configuration
+##### Types
+
+```typescript
+enum GestureType {
+  Tap = 'Tap',
+  DoubleTap = 'DoubleTap',
+  LongPress = 'LongPress',
+  Slide = 'Slide',
+  Swipe = 'Swipe'
+}
+```
+
+##### Directions (Swipe only)
+
+```typescript
+enum GestureDirection {
+  Up = 'Up',
+  Down = 'Down',
+  Left = 'Left',
+  Right = 'Right'
+}
+```
+
+##### Status (Slide only)
+
+```typescript
+enum GestureStatus {
+  Started = 'Started',
+  Moved = 'Moved',
+  Ended = 'Ended'
+}
+```
+
+### Single gesture detectors
+
+If you only need one type of gesture on an element, it will be slightly faster to use a dedicated class for that. 
+
+```typescript
+
+//Optional configurations
 const swipeConfig: SwipeConfig = {
   threshold: 100
 };
+const doubleTapConfig: DoubleTapConfig = {
+  interval: 250
+}
+const longPressConfig: LongPressConfig = {
+  time: 300,
+  threshold: 10
+}
 
-const detector = new SwipeDetector(element, onSwipe.bind(this), swipeConfig);
+const tap = new TapDetector('tapElement', onGesture.bind(this));
+const doubleTap = new DoubleTapDetector('doubleTapElement', onGesture.bind(this), doubleTapConfig);
+const longPress = new LongPressDetector('longPressElement', onGesture.bind(this));
+const slide = new SlideDetector('slideElement', onGesture.bind(this));
+const swipe = new SwipeDetector('swipeElement', onGesture.bind(this), swipeConfig);
 
-function onSwipe(direction: SWIPE_DIR) {
-  if(SWIPE_DIR.DOWN) {
+function onGesture(event: GestureEvent) {
+  if(event.type === GestureType.Swipe && event.dir === GestureDirection.Down) {
+    //Do something
+  } else if(event.type === GestureType.Slide) {
     //Do something
   }
 }
 ```
 
-##### Swipe configuration (Optional)
+##### Swipe configuration
 
 | Attribute | Description | Default |
 | --- | :--- | --- |
-| **threshold** | Distance (in pixels) required to trigger the event | 100px
+| threshold | Minimum distance (in pixels) required to trigger the event | 100px
 
-#### DoubleTap only
-
-```typescript
-import { DoubleTapDetector, DoubleTapConfig } from 'fitbit-gestures';
-
-// Get the element. You can also pass the element ID as string
-const element = document.getElementById('detectorElement'); 
-
-//Optional configuration
-const doubleTapConfig: DoubleTapConfig = {
-  interval: 250
-}
-
-const detector = new DoubleTapDetector(element, onDoubleTap.bind(this), doubleTapConfig);
-
-function onDoubleTap() {
-  //Do something
-}
-```
-
-##### DoubleTap configuration (Optional)
+##### DoubleTap configuration
 
 | Attribute | Description | Default |
 | --- | :--- | --- |
 | **interval** | Time (in ms) required to trigger the event | 250ms
 
-#### Slide only
-
-```typescript
-import { SlideDetector, SlideData } from 'fitbit-gestures';
-
-// Get the element. You can also pass the element ID as string
-const element = document.getElementById('detectorElement');
-
-const detector = new SlideDetector(element, onSlide.bind(this));
-
-function onSlide(data: SlideData) {
-  //Do something
-}
-```
-
-#### LongPress only
-
-```typescript
-import { LongPressDetector } from 'fitbit-gestures';
-
-// Get the element. You can also pass the element ID as string
-const element = document.getElementById('detectorElement');
-
-const detector = new LongPressDetector(element, onLongPress.bind(this));
-
-function onLongPress() {
-  //Do something
-}
-```
-
-##### LongPress configuration (Optional)
+##### LongPress configuration
 
 | Attribute | Description | Default |
 | --- | :--- | --- |

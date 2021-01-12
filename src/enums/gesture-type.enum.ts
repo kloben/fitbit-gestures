@@ -1,7 +1,7 @@
-export enum GESTURE_TYPE {
-  tap = 'tap',
-  doubleTap = 'doubleTap',
-  longPress = 'longPress',
-  swipe = 'swipe',
-  slide = 'slide'
+export enum GestureType {
+  Tap = 'Tap',
+  DoubleTap = 'DoubleTap',
+  LongPress = 'LongPress',
+  Slide = 'Slide',
+  Swipe = 'Swipe'
 }

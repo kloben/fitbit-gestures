@@ -1,5 +1,5 @@
 import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GESTURE_TYPE } from './enums/gesture-type.enum'
+import { GestureType } from './enums/gesture-type.enum'
 
 export abstract class Tap {
   // eslint-disable-next-line no-useless-constructor
@@ -10,8 +10,8 @@ export abstract class Tap {
 
   protected _onMouseUp (evt: MouseEvent) {
     this.cb({
-      type: GESTURE_TYPE.tap,
-      center: {
+      type: GestureType.Tap,
+      point: {
         x: evt.screenX,
         y: evt.screenY
       }
