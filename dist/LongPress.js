@@ -16,7 +16,8 @@ var LongPress = /** @class */ (function () {
         }
         if (Math.abs(evt.screenX - this.startPos.x) > this.threshold ||
             Math.abs(evt.screenY - this.startPos.y) > this.threshold) {
-            this._init(evt);
+            this._reset();
+            this.executed = true;
         }
     };
     LongPress.prototype._onMouseUp = function () {
