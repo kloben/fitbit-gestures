@@ -1,5 +1,5 @@
-export declare enum GESTURE_STATUS {
-    STARTED = "STARTED",
-    MOVED = "MOVED",
-    ENDED = "ENDED"
+export declare enum GestureStatus {
+    Started = "Started",
+    Moved = "Moved",
+    Ended = "Ended"
 }

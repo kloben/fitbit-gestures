@@ -8,8 +8,8 @@ export declare abstract class LongPress {
     private readonly minTime;
     private readonly threshold;
     private startPos;
-    private executed;
     private timeout;
+    private executed;
     constructor(cb: GestureCallback, cfg?: LongPressConfig);
     protected _onMouseDown(evt: MouseEvent): void;
     protected _onMouseMove(evt: MouseEvent): void;

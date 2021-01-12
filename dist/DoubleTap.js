@@ -1,4 +1,4 @@
-import { GESTURE_TYPE } from './enums/gesture-type.enum';
+import { GestureType } from './enums/gesture-type.enum';
 var DoubleTap = /** @class */ (function () {
     function DoubleTap(cb, cfg) {
         this.cb = cb;
@@ -9,8 +9,8 @@ var DoubleTap = /** @class */ (function () {
         var now = Date.now();
         if (now && now - this.lastTap < 250) {
             this.cb({
-                type: GESTURE_TYPE.doubleTap,
-                center: {
+                type: GestureType.DoubleTap,
+                point: {
                     x: evt.screenX,
                     y: evt.screenY
                 }

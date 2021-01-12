@@ -1,10 +1,10 @@
-export declare enum GESTURE_DIRECTION {
-    up = "up",
-    down = "down",
-    left = "left",
-    right = "right",
-    upRight = "upRight",
-    upLeft = "upLeft",
-    downRight = "downRight",
-    downLeft = "downLeft"
+export declare enum GestureDirection {
+    Up = "Up",
+    Down = "Down",
+    Left = "Left",
+    Right = "Right",
+    UpRight = "UpRight",
+    UpLeft = "UpLeft",
+    DownRight = "DownRight",
+    DownLeft = "DownLeft"
 }

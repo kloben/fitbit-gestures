@@ -1,8 +1,8 @@
-export var GESTURE_TYPE;
-(function (GESTURE_TYPE) {
-    GESTURE_TYPE["tap"] = "tap";
-    GESTURE_TYPE["doubleTap"] = "doubleTap";
-    GESTURE_TYPE["longPress"] = "longPress";
-    GESTURE_TYPE["swipe"] = "swipe";
-    GESTURE_TYPE["slide"] = "slide";
-})(GESTURE_TYPE || (GESTURE_TYPE = {}));
+export var GestureType;
+(function (GestureType) {
+    GestureType["Tap"] = "Tap";
+    GestureType["DoubleTap"] = "DoubleTap";
+    GestureType["LongPress"] = "LongPress";
+    GestureType["Slide"] = "Slide";
+    GestureType["Swipe"] = "Swipe";
+})(GestureType || (GestureType = {}));

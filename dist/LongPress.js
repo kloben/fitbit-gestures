@@ -1,9 +1,9 @@
-import { GESTURE_TYPE } from './enums/gesture-type.enum';
+import { GestureType } from './enums/gesture-type.enum';
 var LongPress = /** @class */ (function () {
     function LongPress(cb, cfg) {
         this.cb = cb;
-        this.executed = false;
         this.timeout = null;
+        this.executed = false;
         this.minTime = (cfg === null || cfg === void 0 ? void 0 : cfg.time) || 300;
         this.threshold = (cfg === null || cfg === void 0 ? void 0 : cfg.time) || 10;
     }
@@ -40,8 +40,8 @@ var LongPress = /** @class */ (function () {
     LongPress.prototype._execute = function () {
         this.executed = true;
         this.cb({
-            type: GESTURE_TYPE.longPress,
-            center: this.startPos
+            type: GestureType.LongPress,
+            point: this.startPos
         });
     };
     return LongPress;

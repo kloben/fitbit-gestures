@@ -1,5 +1,5 @@
-import { GESTURE_DIRECTION } from './enums/gesture-direction.enum';
-import { GESTURE_TYPE } from './enums/gesture-type.enum';
+import { GestureDirection } from './enums/gesture-direction.enum';
+import { GestureType } from './enums/gesture-type.enum';
 var Swipe = /** @class */ (function () {
     function Swipe(cb, cfg) {
         this.cb = cb;
@@ -18,9 +18,9 @@ var Swipe = /** @class */ (function () {
         var dir = this.getDirection(evt.screenX - this.initX, evt.screenY - this.initY);
         if (dir) {
             this.cb({
-                type: GESTURE_TYPE.swipe,
+                type: GestureType.Swipe,
                 dir: dir,
-                center: {
+                point: {
                     x: evt.screenX,
                     y: evt.screenY
                 },
@@ -35,16 +35,16 @@ var Swipe = /** @class */ (function () {
     };
     Swipe.prototype.getDirection = function (x, y) {
         if (y < -this.threshold) {
-            return GESTURE_DIRECTION.up;
+            return GestureDirection.Up;
         }
         else if (y > this.threshold) {
-            return GESTURE_DIRECTION.down;
+            return GestureDirection.Down;
         }
         else if (x < -this.threshold) {
-            return GESTURE_DIRECTION.left;
+            return GestureDirection.Left;
         }
         else if (x > this.threshold) {
-            return GESTURE_DIRECTION.right;
+            return GestureDirection.Right;
         }
     };
     return Swipe;

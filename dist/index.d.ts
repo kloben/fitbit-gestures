@@ -1,5 +1,5 @@
-export { GESTURE_DIRECTION } from './enums/gesture-direction.enum';
-export { GESTURE_TYPE } from './enums/gesture-type.enum';
+export { GestureDirection } from './enums/gesture-direction.enum';
+export { GestureType } from './enums/gesture-type.enum';
 export { GestureCallback } from './interfaces/gesture-callback.interface';
 export { GestureEvent } from './interfaces/gesture-event.interface';
 export { Point } from './interfaces/point.interface';
@@ -10,4 +10,5 @@ export { DoubleTapConfig } from './DoubleTap';
 export { SlideDetector } from './SlideDetector';
 export { LongPressDetector } from './LongPressDetector';
 export { LongPressConfig } from './LongPress';
-export { GestureDetector, GestureConfig } from './GestureDetector';
+export { TapDetector } from './TapDetector';
+export { GestureDetector } from './GestureDetector';
