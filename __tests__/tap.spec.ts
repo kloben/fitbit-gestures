@@ -32,6 +32,24 @@ describe('Tap Gesture', () => {
     expect(cb).toHaveBeenCalledTimes(0)
   })
 
+  test('Test single slow tap override', async () => {
+    const cb = jest.fn()
+    const gesture = new TapPrivate(cb, { interval: 1000 })
+    const event = TestUtil.getMouseEvent(10, 15)
+    const response: GestureEvent = {
+      type: GestureType.Tap,
+      point: {
+        x: 10,
+        y: 15
+      }
+    }
+    gesture.onMouseDown(event)
+    await wait(300)
+    gesture.onMouseUp(event)
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith(response)
+  })
+
   test('Test double tap', async () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
@@ -75,5 +93,23 @@ describe('Tap Gesture', () => {
     gesture.onMouseDown(startEventB)
     gesture.onMouseUp(endEventB)
     expect(cb).toHaveBeenCalledTimes(0)
+  })
+
+  test('Test exceed threshold override', async () => {
+    const cb = jest.fn()
+    const gesture = new TapPrivate(cb, { threshold: 100 })
+    const startEvent = TestUtil.getMouseEvent(10, 15)
+    const endEvent = TestUtil.getMouseEvent(10, 100)
+    const response: GestureEvent = {
+      type: GestureType.Tap,
+      point: {
+        x: 10,
+        y: 15
+      }
+    }
+    gesture.onMouseDown(startEvent)
+    gesture.onMouseUp(endEvent)
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith(response)
   })
 })

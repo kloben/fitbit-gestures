@@ -4,13 +4,13 @@ import { Point } from '../interfaces/point.interface'
 import { IsInsideThreshold } from '../helpers/point.helper'
 
 export interface TapConfig {
-  interval: number,
-  threshold: number
+  interval?: number,
+  threshold?: number
 }
 
 export abstract class Tap {
-  private readonly interval: number
-  private readonly threshold: number
+  private readonly maxInterval: number
+  private readonly maxThreshold: number
   private initialPoint: Point
   private initialTime: number
 
@@ -18,8 +18,8 @@ export abstract class Tap {
     private readonly cb: GestureCallback,
     cfg?: TapConfig
   ) {
-    this.interval = cfg?.interval || 250
-    this.threshold = cfg?.threshold || 10
+    this.maxInterval = cfg?.interval || 250
+    this.maxThreshold = cfg?.threshold || 10
   }
 
   protected _onMouseDown (evt: MouseEvent) {
@@ -35,10 +35,10 @@ export abstract class Tap {
       return
     }
     const now = Date.now()
-    if (now - this.initialTime <= this.threshold && IsInsideThreshold(this.initialPoint, {
+    if (now - this.initialTime <= this.maxInterval && IsInsideThreshold(this.initialPoint, {
       x: evt.screenX,
       y: evt.screenY
-    }, this.threshold)) {
+    }, this.maxThreshold)) {
       this.cb({
         type: GestureType.Tap,
         point: this.initialPoint
