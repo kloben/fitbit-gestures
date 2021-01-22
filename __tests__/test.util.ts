@@ -10,7 +10,7 @@ interface MouseEvent {
 }
 
 export class TestUtil {
-  static getEvent (x: number, y: number): MouseEvent {
+  static getMouseEvent (x: number, y: number): MouseEvent {
     return {
       screenX: x,
       screenY: y,
