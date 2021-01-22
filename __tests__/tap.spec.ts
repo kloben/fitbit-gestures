@@ -5,6 +5,14 @@ import { GestureEvent } from '../src/interfaces/gesture-event.interface'
 
 describe('Tap Gesture', () => {
 
+  test('Test up without down', () => {
+    const cb = jest.fn()
+    const gesture = new TapPrivate(cb)
+    const event = TestUtil.getMouseEvent(10, 15)
+    gesture.onMouseUp(event)
+    expect(cb).toHaveBeenCalledTimes(0)
+  })
+
   test('Test single fast tap', () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
