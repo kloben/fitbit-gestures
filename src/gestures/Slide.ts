@@ -1,6 +1,6 @@
-import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GestureType } from './enums/gesture-type.enum'
-import { GestureStatus } from './enums/gesture-status.enum'
+import { GestureCallback } from '../interfaces/gesture-callback.interface'
+import { GestureType } from '../enums/gesture-type.enum'
+import { GestureStatus } from '../enums/gesture-status.enum'
 
 export abstract class Slide {
   private startX: number = null

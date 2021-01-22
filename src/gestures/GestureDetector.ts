@@ -1,11 +1,11 @@
 import { SwipeConfig } from './Swipe'
-import { findElement } from './helpers/find-element.helper'
+import { findElement } from '../helpers/find-element.helper'
 import { SwipePrivate } from './SwipePrivate'
 import { DoubleTapPrivate } from './DoubleTapPrivate'
 import { DoubleTapConfig } from './DoubleTap'
 import { SlidePrivate } from './SlidePrivate'
 import { LongPressPrivate } from './LongPressPrivate'
-import { GestureCallback } from './interfaces/gesture-callback.interface'
+import { GestureCallback } from '../interfaces/gesture-callback.interface'
 import { TapPrivate } from './TapPrivate'
 
 export class GestureDetector {

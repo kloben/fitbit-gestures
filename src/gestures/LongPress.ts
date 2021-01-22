@@ -1,6 +1,6 @@
-import { Point } from './interfaces/point.interface'
-import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GestureType } from './enums/gesture-type.enum'
+import { Point } from '../interfaces/point.interface'
+import { GestureCallback } from '../interfaces/gesture-callback.interface'
+import { GestureType } from '../enums/gesture-type.enum'
 
 export interface LongPressConfig {
   time?: number,

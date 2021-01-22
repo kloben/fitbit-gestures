@@ -1,6 +1,6 @@
-import { findElement } from './helpers/find-element.helper'
+import { findElement } from '../helpers/find-element.helper'
 import { Swipe, SwipeConfig } from './Swipe'
-import { GestureCallback } from './interfaces/gesture-callback.interface'
+import { GestureCallback } from '../interfaces/gesture-callback.interface'
 
 export class SwipeDetector extends Swipe {
   private readonly element: Element

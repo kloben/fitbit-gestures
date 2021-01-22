@@ -1,5 +1,5 @@
-import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GestureType } from './enums/gesture-type.enum'
+import { GestureCallback } from '../interfaces/gesture-callback.interface'
+import { GestureType } from '../enums/gesture-type.enum'
 
 export abstract class Tap {
   // eslint-disable-next-line no-useless-constructor

@@ -1,4 +1,4 @@
-import { TapPrivate } from '../src/TapPrivate'
+import { TapPrivate } from '../src/gestures/TapPrivate'
 import { TestUtil } from './test.util'
 
 describe('Tap Gesture', () => {

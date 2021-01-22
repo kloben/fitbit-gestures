@@ -1,6 +1,6 @@
-import { findElement } from './helpers/find-element.helper'
+import { findElement } from '../helpers/find-element.helper'
 import { DoubleTap, DoubleTapConfig } from './DoubleTap'
-import { GestureCallback } from './interfaces/gesture-callback.interface'
+import { GestureCallback } from '../interfaces/gesture-callback.interface'
 
 export class DoubleTapDetector extends DoubleTap {
   private readonly element: Element

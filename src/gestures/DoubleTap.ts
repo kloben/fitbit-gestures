@@ -1,5 +1,5 @@
-import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GestureType } from './enums/gesture-type.enum'
+import { GestureCallback } from '../interfaces/gesture-callback.interface'
+import { GestureType } from '../enums/gesture-type.enum'
 
 export interface DoubleTapConfig {
   interval: number

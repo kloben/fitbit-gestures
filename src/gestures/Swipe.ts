@@ -1,6 +1,6 @@
-import { GestureCallback } from './interfaces/gesture-callback.interface'
-import { GestureDirection } from './enums/gesture-direction.enum'
-import { GestureType } from './enums/gesture-type.enum'
+import { GestureCallback } from '../interfaces/gesture-callback.interface'
+import { GestureDirection } from '../enums/gesture-direction.enum'
+import { GestureType } from '../enums/gesture-type.enum'
 
 export interface SwipeConfig {
   threshold: number

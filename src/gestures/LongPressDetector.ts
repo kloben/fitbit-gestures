@@ -1,6 +1,6 @@
 import { LongPress, LongPressConfig } from './LongPress'
-import { findElement } from './helpers/find-element.helper'
-import { GestureCallback } from './interfaces/gesture-callback.interface'
+import { findElement } from '../helpers/find-element.helper'
+import { GestureCallback } from '../interfaces/gesture-callback.interface'
 
 export class LongPressDetector extends LongPress {
   private readonly element: Element
