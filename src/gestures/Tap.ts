@@ -11,8 +11,8 @@ export interface TapConfig {
 export abstract class Tap {
   private readonly interval: number
   private readonly threshold: number
-  private lastPoint: Point
-  private lastTime: number
+  private initialPoint: Point
+  private initialTime: number
 
   constructor (
     private readonly cb: GestureCallback,
@@ -23,32 +23,29 @@ export abstract class Tap {
   }
 
   protected _onMouseDown (evt: MouseEvent) {
-    this.lastPoint = {
+    this.initialPoint = {
       x: evt.screenX,
       y: evt.screenY
     }
-    this.lastTime = Date.now()
+    this.initialTime = Date.now()
   }
 
   protected _onMouseUp (evt: MouseEvent) {
-    if (!this.lastTime || !this.lastPoint) {
+    if (!this.initialTime || !this.initialPoint) {
       return
     }
     const now = Date.now()
-    if (now - this.lastTime <= this.threshold && IsInsideThreshold(this.lastPoint, {
+    if (now - this.initialTime <= this.threshold && IsInsideThreshold(this.initialPoint, {
       x: evt.screenX,
       y: evt.screenY
     }, this.threshold)) {
       this.cb({
         type: GestureType.Tap,
-        point: {
-          x: evt.screenX,
-          y: evt.screenY
-        }
+        point: this.initialPoint
       })
     }
 
-    this.lastPoint = null
-    this.lastTime = null
+    this.initialPoint = null
+    this.initialTime = null
   }
 }
