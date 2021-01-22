@@ -11,6 +11,7 @@ export class TapDetector extends Tap {
   ) {
     super(cb)
     this.element = findElement(element)
+    this.element.onmouseup = this._onMouseUp.bind(this)
     this.element.onmousedown = this._onMouseDown.bind(this)
   }
 }

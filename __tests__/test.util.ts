@@ -4,9 +4,19 @@ interface MouseEvent {
   readonly defaultPrevented: boolean;
   readonly target: any;
   readonly type: string;
-  preventDefault(): void;
-  stopImmediatePropagation(): void;
-  stopPropagation(): void;
+
+  preventDefault (): void;
+
+  stopImmediatePropagation (): void;
+
+  stopPropagation (): void;
+}
+
+export function wait (ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    // @ts-ignore
+    return setTimeout(resolve, ms)
+  })
 }
 
 export class TestUtil {
@@ -17,9 +27,12 @@ export class TestUtil {
       defaultPrevented: false,
       target: null,
       type: 'MouseEvent',
-      preventDefault: () => {},
-      stopImmediatePropagation: () => {},
-      stopPropagation: () => {}
+      preventDefault: () => {
+      },
+      stopImmediatePropagation: () => {
+      },
+      stopPropagation: () => {
+      }
     }
   }
 }

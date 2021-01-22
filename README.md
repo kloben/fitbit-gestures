@@ -117,6 +117,10 @@ If you only need one type of gesture on an element, it will be slightly faster t
 ```typescript
 
 //Optional configurations
+const tapConfig: TapConfig = {
+  interval: 250,
+  threshold: 10
+}
 const swipeConfig: SwipeConfig = {
   threshold: 100
 };
@@ -128,7 +132,7 @@ const longPressConfig: LongPressConfig = {
   threshold: 10
 }
 
-const tap = new TapDetector('tapElement', onGesture.bind(this));
+const tap = new TapDetector('tapElement', onGesture.bind(this), tapConfig);
 const doubleTap = new DoubleTapDetector('doubleTapElement', onGesture.bind(this), doubleTapConfig);
 const longPress = new LongPressDetector('longPressElement', onGesture.bind(this));
 const slide = new SlideDetector('slideElement', onGesture.bind(this));
@@ -142,18 +146,25 @@ function onGesture(event: GestureEvent) {
   }
 }
 ```
+##### Tap configuration
+
+| Attribute | Description | Default |
+| --- | :--- | --- |
+| **interval** | Maximum time (in ms) between start touching and releasing | 250ms
+| **threshold** | Maximum allowed distance (in px) between start touching and releasing | 10px
+
+##### DoubleTap configuration
+
+| Attribute | Description | Default |
+| --- | :--- | --- |
+| **interval** | Maximum time (in ms) between taps | 250ms
+
 
 ##### Swipe configuration
 
 | Attribute | Description | Default |
 | --- | :--- | --- |
 | threshold | Minimum distance (in pixels) required to trigger the event | 100px
-
-##### DoubleTap configuration
-
-| Attribute | Description | Default |
-| --- | :--- | --- |
-| **interval** | Time (in ms) required to trigger the event | 250ms
 
 ##### LongPress configuration
 

@@ -30,6 +30,7 @@ export class GestureDetector {
 
   onTap (cb: GestureCallback) {
     this.tap = new TapPrivate(cb)
+    this._addListener('up', this.tap.onMouseUp.bind(this.tap))
     this._addListener('down', this.tap.onMouseDown.bind(this.tap))
   }
 
