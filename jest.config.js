@@ -3,6 +3,6 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverage: false,
   coverageDirectory: 'coverage',
-  collectCoverageFrom: ['src/**/*.{js,ts}'],
+  collectCoverageFrom: ['src/gestures/**/*.{js,ts}'],
   testMatch: ['**/__tests__/**/*.spec.ts?(x)']
 }

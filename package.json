@@ -8,7 +8,7 @@
     "build": "rm -r ./dist && tsc",
     "lint": "eslint src/**/*.ts",
     "test": "jest --watch",
-    "test:coverage": "jest --collectCoverage=true"
+    "test:coverage": "jest --collectCoverage=true && open coverage/lcov-report/index.html"
   },
   "author": "Valga Medios",
   "license": "ISC",
