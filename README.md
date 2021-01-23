@@ -65,7 +65,7 @@ interface GestureEvent {
   point: Point,
   from?: Point,                   //Swipe & Slide only
   dir?: GestureDirection,         //Swipe only
-  status?: GestureStatus          //Slide only
+  ended?: boolean                 //Slide only
 }
 ```
 
@@ -100,16 +100,6 @@ enum GestureDirection {
 }
 ```
 
-##### Status (Slide only)
-
-```typescript
-enum GestureStatus {
-  Started = 'Started',
-  Moved = 'Moved',
-  Ended = 'Ended'
-}
-```
-
 ### Single gesture detectors
 
 If you only need one type of gesture on an element, it will be slightly faster to use a dedicated class for that. 
@@ -125,18 +115,21 @@ const doubleTapConfig: DoubleTapConfig = {
   interval: 250,
   threshold: 10
 }
-const swipeConfig: SwipeConfig = {
-  threshold: 100
-}
 const longPressConfig: LongPressConfig = {
   time: 300,
   threshold: 10
+}
+const slideConfig: SlideConfig = {
+  threshold: 10
+}
+const swipeConfig: SwipeConfig = {
+  threshold: 100
 }
 
 const tap = new TapDetector('tapElement', onGesture.bind(this), tapConfig);
 const doubleTap = new DoubleTapDetector('doubleTapElement', onGesture.bind(this), doubleTapConfig);
 const longPress = new LongPressDetector('longPressElement', onGesture.bind(this));
-const slide = new SlideDetector('slideElement', onGesture.bind(this));
+const slide = new SlideDetector('slideElement', onGesture.bind(this), slideConfig);
 const swipe = new SwipeDetector('swipeElement', onGesture.bind(this), swipeConfig);
 
 function onGesture(event: GestureEvent) {
@@ -167,6 +160,12 @@ function onGesture(event: GestureEvent) {
 | --- | :--- | --- |
 | **time** | Minimum time (in ms) required to trigger the event | 300ms
 | **threshold** | Max distance (in px) allowed | 10px
+
+##### Slide configuration
+
+| Attribute | Description | Default |
+| --- | :--- | --- |
+| **threshold** | Minimum distance (in pixels) to start recognizing | 10px
 
 ##### Swipe configuration
 
