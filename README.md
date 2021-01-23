@@ -161,16 +161,15 @@ function onGesture(event: GestureEvent) {
 | **interval** | Maximum time (in ms) between taps | 250ms
 | **threshold** | Maximum allowed distance (in px) between taps | 10px
 
-
-##### Swipe configuration
-
-| Attribute | Description | Default |
-| --- | :--- | --- |
-| threshold | Minimum distance (in pixels) required to trigger the event | 100px
-
 ##### LongPress configuration
 
 | Attribute | Description | Default |
 | --- | :--- | --- |
 | **time** | Minimum time (in ms) required to trigger the event | 300ms
 | **threshold** | Max distance (in px) allowed | 10px
+
+##### Swipe configuration
+
+| Attribute | Description | Default |
+| --- | :--- | --- |
+| **threshold** | Minimum distance (in pixels) required to trigger the event | 100px
