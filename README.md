@@ -121,11 +121,12 @@ const tapConfig: TapConfig = {
   interval: 250,
   threshold: 10
 }
+const doubleTapConfig: DoubleTapConfig = {
+  interval: 250,
+  threshold: 10
+}
 const swipeConfig: SwipeConfig = {
   threshold: 100
-};
-const doubleTapConfig: DoubleTapConfig = {
-  interval: 250
 }
 const longPressConfig: LongPressConfig = {
   time: 300,
@@ -158,6 +159,7 @@ function onGesture(event: GestureEvent) {
 | Attribute | Description | Default |
 | --- | :--- | --- |
 | **interval** | Maximum time (in ms) between taps | 250ms
+| **threshold** | Maximum allowed distance (in px) between taps | 10px
 
 
 ##### Swipe configuration
