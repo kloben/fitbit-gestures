@@ -19,20 +19,18 @@ export function wait (ms: number): Promise<void> {
   })
 }
 
-export class TestUtil {
-  static getMouseEvent (x: number, y: number): MouseEvent {
-    return {
-      screenX: x,
-      screenY: y,
-      defaultPrevented: false,
-      target: null,
-      type: 'MouseEvent',
-      preventDefault: () => {
-      },
-      stopImmediatePropagation: () => {
-      },
-      stopPropagation: () => {
-      }
+export function getMouseEvent (x: number, y: number): MouseEvent {
+  return {
+    screenX: x,
+    screenY: y,
+    defaultPrevented: false,
+    target: null,
+    type: 'MouseEvent',
+    preventDefault: () => {
+    },
+    stopImmediatePropagation: () => {
+    },
+    stopPropagation: () => {
     }
   }
 }

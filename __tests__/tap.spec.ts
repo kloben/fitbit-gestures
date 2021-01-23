@@ -1,5 +1,5 @@
 import { TapPrivate } from '../src/gestures/TapPrivate'
-import { TestUtil, wait } from './test.util'
+import { getMouseEvent, wait } from './test.util'
 import { GestureType } from '../src/enums/gesture-type.enum'
 import { GestureEvent } from '../src/interfaces/gesture-event.interface'
 
@@ -8,7 +8,7 @@ describe('Tap Gesture', () => {
   test('Test single fast tap', () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
-    const event = TestUtil.getMouseEvent(10, 15)
+    const event = getMouseEvent(10, 15)
     const response: GestureEvent = {
       type: GestureType.Tap,
       point: {
@@ -27,7 +27,7 @@ describe('Tap Gesture', () => {
   test('Test single slow tap', async () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
-    const event = TestUtil.getMouseEvent(10, 15)
+    const event = getMouseEvent(10, 15)
 
     gesture.onMouseDown(event)
     await wait(300)
@@ -39,7 +39,7 @@ describe('Tap Gesture', () => {
   test('Test single slow tap override', async () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb, { interval: 1000 })
-    const event = TestUtil.getMouseEvent(10, 15)
+    const event = getMouseEvent(10, 15)
     const response: GestureEvent = {
       type: GestureType.Tap,
       point: {
@@ -59,7 +59,7 @@ describe('Tap Gesture', () => {
   test('Test double tap', async () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
-    const event = TestUtil.getMouseEvent(10, 15)
+    const event = getMouseEvent(10, 15)
 
     gesture.onMouseDown(event)
     gesture.onMouseUp(event)
@@ -73,8 +73,8 @@ describe('Tap Gesture', () => {
   test('Test minor movement allowed', () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
-    const startEvent = TestUtil.getMouseEvent(10, 15)
-    const endEvent = TestUtil.getMouseEvent(5, 25)
+    const startEvent = getMouseEvent(10, 15)
+    const endEvent = getMouseEvent(5, 25)
     const response: GestureEvent = {
       type: GestureType.Tap,
       point: {
@@ -93,10 +93,10 @@ describe('Tap Gesture', () => {
   test('Test exceed threshold', async () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
-    const startEventA = TestUtil.getMouseEvent(10, 15)
-    const endEventA = TestUtil.getMouseEvent(10, 100)
-    const startEventB = TestUtil.getMouseEvent(10, 15)
-    const endEventB = TestUtil.getMouseEvent(10, 26)
+    const startEventA = getMouseEvent(10, 15)
+    const endEventA = getMouseEvent(10, 100)
+    const startEventB = getMouseEvent(10, 15)
+    const endEventB = getMouseEvent(10, 26)
 
     gesture.onMouseDown(startEventA)
     gesture.onMouseUp(endEventA)
@@ -110,8 +110,8 @@ describe('Tap Gesture', () => {
   test('Test exceed threshold override', async () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb, { threshold: 100 })
-    const startEvent = TestUtil.getMouseEvent(10, 15)
-    const endEvent = TestUtil.getMouseEvent(10, 100)
+    const startEvent = getMouseEvent(10, 15)
+    const endEvent = getMouseEvent(10, 100)
     const response: GestureEvent = {
       type: GestureType.Tap,
       point: {
@@ -130,7 +130,7 @@ describe('Tap Gesture', () => {
   test('Test up without down', () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
-    const event = TestUtil.getMouseEvent(10, 15)
+    const event = getMouseEvent(10, 15)
 
     gesture.onMouseUp(event)
 
