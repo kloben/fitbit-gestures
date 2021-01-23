@@ -37,7 +37,7 @@ export abstract class DoubleTap {
     ) {
       this.cb({
         type: GestureType.DoubleTap,
-        point: actualPoint
+        point: this.lastPoint
       })
       this.lastTime = null
       this.lastPoint = null
