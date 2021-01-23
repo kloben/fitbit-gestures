@@ -1,6 +1,7 @@
 import { Point } from '../interfaces/point.interface'
 import { GestureCallback } from '../interfaces/gesture-callback.interface'
 import { GestureType } from '../enums/gesture-type.enum'
+import { IsInsideThreshold } from '../helpers/point.helper'
 
 export interface LongPressConfig {
   time?: number,
@@ -10,7 +11,7 @@ export interface LongPressConfig {
 export abstract class LongPress {
   private readonly minTime: number
   private readonly threshold: number
-  private startPos: Point | null
+  private initialPoint: Point | null
   private timeout: number = null
   private executed = false
 
@@ -19,7 +20,7 @@ export abstract class LongPress {
     cfg?: LongPressConfig
   ) {
     this.minTime = cfg?.time || 300
-    this.threshold = cfg?.time || 10
+    this.threshold = cfg?.threshold || 10
   }
 
   protected _onMouseDown (evt: MouseEvent) {
@@ -27,12 +28,14 @@ export abstract class LongPress {
   }
 
   protected _onMouseMove (evt: MouseEvent) {
-    if (this.executed || !this.startPos) {
+    if (this.executed || !this.initialPoint) {
       return
     }
     if (
-      Math.abs(evt.screenX - this.startPos.x) > this.threshold ||
-      Math.abs(evt.screenY - this.startPos.y) > this.threshold
+      !IsInsideThreshold(this.initialPoint, {
+        x: evt.screenX,
+        y: evt.screenY
+      }, this.threshold)
     ) {
       this._reset()
       this.executed = true
@@ -46,7 +49,7 @@ export abstract class LongPress {
   private _init (evt: MouseEvent) {
     this._reset()
     this.timeout = setTimeout(this._execute.bind(this), this.minTime)
-    this.startPos = {
+    this.initialPoint = {
       x: evt.screenX,
       y: evt.screenY
     }
@@ -56,7 +59,7 @@ export abstract class LongPress {
     if (this.timeout) {
       clearTimeout(this.timeout)
     }
-    this.startPos = null
+    this.initialPoint = null
     this.executed = false
   }
 
@@ -64,7 +67,7 @@ export abstract class LongPress {
     this.executed = true
     this.cb({
       type: GestureType.LongPress,
-      point: this.startPos
+      point: this.initialPoint
     })
   }
 }
