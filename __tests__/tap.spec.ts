@@ -5,14 +5,6 @@ import { GestureEvent } from '../src/interfaces/gesture-event.interface'
 
 describe('Tap Gesture', () => {
 
-  test('Test up without down', () => {
-    const cb = jest.fn()
-    const gesture = new TapPrivate(cb)
-    const event = TestUtil.getMouseEvent(10, 15)
-    gesture.onMouseUp(event)
-    expect(cb).toHaveBeenCalledTimes(0)
-  })
-
   test('Test single fast tap', () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
@@ -24,8 +16,10 @@ describe('Tap Gesture', () => {
         y: 15
       }
     }
+
     gesture.onMouseDown(event)
     gesture.onMouseUp(event)
+
     expect(cb).toHaveBeenCalledTimes(1)
     expect(cb).toHaveBeenCalledWith(response)
   })
@@ -34,9 +28,11 @@ describe('Tap Gesture', () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
     const event = TestUtil.getMouseEvent(10, 15)
+
     gesture.onMouseDown(event)
     await wait(300)
     gesture.onMouseUp(event)
+
     expect(cb).toHaveBeenCalledTimes(0)
   })
 
@@ -51,9 +47,11 @@ describe('Tap Gesture', () => {
         y: 15
       }
     }
+
     gesture.onMouseDown(event)
     await wait(300)
     gesture.onMouseUp(event)
+
     expect(cb).toHaveBeenCalledTimes(1)
     expect(cb).toHaveBeenCalledWith(response)
   })
@@ -62,11 +60,13 @@ describe('Tap Gesture', () => {
     const cb = jest.fn()
     const gesture = new TapPrivate(cb)
     const event = TestUtil.getMouseEvent(10, 15)
+
     gesture.onMouseDown(event)
     gesture.onMouseUp(event)
     await wait(100)
     gesture.onMouseDown(event)
     gesture.onMouseUp(event)
+
     expect(cb).toHaveBeenCalledTimes(2)
   })
 
@@ -82,8 +82,10 @@ describe('Tap Gesture', () => {
         y: 15
       }
     }
+
     gesture.onMouseDown(startEvent)
     gesture.onMouseUp(endEvent)
+
     expect(cb).toHaveBeenCalledTimes(1)
     expect(cb).toHaveBeenCalledWith(response)
   })
@@ -95,11 +97,13 @@ describe('Tap Gesture', () => {
     const endEventA = TestUtil.getMouseEvent(10, 100)
     const startEventB = TestUtil.getMouseEvent(10, 15)
     const endEventB = TestUtil.getMouseEvent(10, 26)
+
     gesture.onMouseDown(startEventA)
     gesture.onMouseUp(endEventA)
     await wait(10)
     gesture.onMouseDown(startEventB)
     gesture.onMouseUp(endEventB)
+
     expect(cb).toHaveBeenCalledTimes(0)
   })
 
@@ -115,9 +119,21 @@ describe('Tap Gesture', () => {
         y: 15
       }
     }
+
     gesture.onMouseDown(startEvent)
     gesture.onMouseUp(endEvent)
+
     expect(cb).toHaveBeenCalledTimes(1)
     expect(cb).toHaveBeenCalledWith(response)
+  })
+
+  test('Test up without down', () => {
+    const cb = jest.fn()
+    const gesture = new TapPrivate(cb)
+    const event = TestUtil.getMouseEvent(10, 15)
+
+    gesture.onMouseUp(event)
+
+    expect(cb).toHaveBeenCalledTimes(0)
   })
 })
