@@ -42,6 +42,7 @@ describe('Slide Gesture', () => {
     gesture.onMouseDown(eventFrom)
     gesture.onMouseMove(eventTo)
     gesture.onMouseUp(eventTo)
+
     expect(cb).toHaveBeenCalledTimes(0)
   })
 
@@ -54,6 +55,7 @@ describe('Slide Gesture', () => {
     gesture.onMouseMove(eventFrom)
     gesture.onMouseMove(eventTo)
     gesture.onMouseUp(eventTo)
+
     expect(cb).toHaveBeenCalledTimes(0)
   })
 })

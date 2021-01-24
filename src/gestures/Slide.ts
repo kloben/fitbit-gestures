@@ -43,10 +43,6 @@ export abstract class Slide {
   }
 
   private _generateEvent (ended: boolean, point: Point) {
-    if (!this.lastPoint || !this.startPoint) {
-      return
-    }
-
     this.cb({
       type: GestureType.Slide,
       ended,
