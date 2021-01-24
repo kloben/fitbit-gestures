@@ -14,3 +14,7 @@ export function GetPoint (evt: MouseEvent): Point {
     y: evt.screenY
   }
 }
+
+export function GetDistance (pointA: Point, pointB: Point): number {
+  return Math.max(Math.abs(pointA.x - pointB.x), Math.abs(pointA.y - pointB.y))
+}
