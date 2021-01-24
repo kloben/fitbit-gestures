@@ -1,8 +1,8 @@
-import { getMouseEvent } from './test.util'
-import { GestureType } from '../src/enums/gesture-type.enum'
-import { GestureEvent } from '../src/interfaces/gesture-event.interface'
-import { SwipePrivate } from '../src/gestures/SwipePrivate'
-import { GestureDirection } from '../src/enums/gesture-direction.enum'
+import { getMouseEvent } from '../test.util'
+import { GestureType } from '../../src/enums/gesture-type.enum'
+import { GestureEvent } from '../../src/interfaces/gesture-event.interface'
+import { SwipePrivate } from '../../src/gestures/SwipePrivate'
+import { GestureDirection } from '../../src/enums/gesture-direction.enum'
 
 describe('Swipe Gesture', () => {
 

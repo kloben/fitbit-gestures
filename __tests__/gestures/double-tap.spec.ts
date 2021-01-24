@@ -1,8 +1,8 @@
-import { DoubleTapPrivate } from '../src/gestures/DoubleTapPrivate'
-import { getMouseEvent, wait } from './test.util'
-import { GestureEvent } from '../src/interfaces/gesture-event.interface'
-import { GestureType } from '../src/enums/gesture-type.enum'
-import { TapPrivate } from '../src/gestures/TapPrivate'
+import { DoubleTapPrivate } from '../../src/gestures/DoubleTapPrivate'
+import { getMouseEvent, wait } from '../test.util'
+import { GestureEvent } from '../../src/interfaces/gesture-event.interface'
+import { GestureType } from '../../src/enums/gesture-type.enum'
+import { TapPrivate } from '../../src/gestures/TapPrivate'
 
 describe('Double Tap Gesture', () => {
 

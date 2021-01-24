@@ -1,7 +1,7 @@
-import { TapPrivate } from '../src/gestures/TapPrivate'
-import { getMouseEvent, wait } from './test.util'
-import { GestureType } from '../src/enums/gesture-type.enum'
-import { GestureEvent } from '../src/interfaces/gesture-event.interface'
+import { TapPrivate } from '../../src/gestures/TapPrivate'
+import { getMouseEvent, wait } from '../test.util'
+import { GestureType } from '../../src/enums/gesture-type.enum'
+import { GestureEvent } from '../../src/interfaces/gesture-event.interface'
 
 describe('Tap Gesture', () => {
 

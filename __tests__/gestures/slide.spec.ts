@@ -1,7 +1,7 @@
-import { getMouseEvent } from './test.util'
-import { GestureType } from '../src/enums/gesture-type.enum'
-import { GestureEvent } from '../src/interfaces/gesture-event.interface'
-import { SlidePrivate } from '../src/gestures/SlidePrivate'
+import { getMouseEvent } from '../test.util'
+import { GestureType } from '../../src/enums/gesture-type.enum'
+import { GestureEvent } from '../../src/interfaces/gesture-event.interface'
+import { SlidePrivate } from '../../src/gestures/SlidePrivate'
 
 describe('Slide Gesture', () => {
 

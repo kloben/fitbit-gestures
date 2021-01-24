@@ -1,7 +1,7 @@
-import { getMouseEvent, wait } from './test.util'
-import { GestureEvent } from '../src/interfaces/gesture-event.interface'
-import { GestureType } from '../src/enums/gesture-type.enum'
-import { LongPressPrivate } from '../src/gestures/LongPressPrivate'
+import { getMouseEvent, wait } from '../test.util'
+import { GestureEvent } from '../../src/interfaces/gesture-event.interface'
+import { GestureType } from '../../src/enums/gesture-type.enum'
+import { LongPressPrivate } from '../../src/gestures/LongPressPrivate'
 
 describe('Long Press Gesture', () => {
 
