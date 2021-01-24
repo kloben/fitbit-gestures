@@ -1,5 +1,5 @@
 import { SwipeConfig } from './Swipe'
-import { findElement } from '../helpers/find-element.helper'
+import { FindElement } from '../helpers/dom.helper'
 import { SwipePrivate } from './SwipePrivate'
 import { DoubleTapPrivate } from './DoubleTapPrivate'
 import { DoubleTapConfig } from './DoubleTap'
@@ -24,7 +24,7 @@ export class GestureDetector {
   constructor (
     element: string | Element
   ) {
-    this.element = findElement(element)
+    this.element = FindElement(element)
     return this
   }
 

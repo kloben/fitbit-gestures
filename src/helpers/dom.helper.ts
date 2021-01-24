@@ -1,6 +1,6 @@
 import document from 'document'
 
-export function findElement (element: string | Element): Element {
+export function FindElement (element: string | Element): Element {
   let el
   if (typeof element === 'string') {
     el = document.getElementById(element)

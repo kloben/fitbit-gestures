@@ -1,4 +1,4 @@
-import { findElement } from '../helpers/find-element.helper'
+import { FindElement } from '../helpers/dom.helper'
 import { GestureCallback } from '../interfaces/gesture-callback.interface'
 import { Tap } from './Tap'
 
@@ -10,7 +10,7 @@ export class TapDetector extends Tap {
     cb: GestureCallback
   ) {
     super(cb)
-    this.element = findElement(element)
+    this.element = FindElement(element)
     this.element.onmouseup = this._onMouseUp.bind(this)
     this.element.onmousedown = this._onMouseDown.bind(this)
   }

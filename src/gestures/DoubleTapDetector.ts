@@ -1,4 +1,4 @@
-import { findElement } from '../helpers/find-element.helper'
+import { FindElement } from '../helpers/dom.helper'
 import { DoubleTap, DoubleTapConfig } from './DoubleTap'
 import { GestureCallback } from '../interfaces/gesture-callback.interface'
 
@@ -11,7 +11,7 @@ export class DoubleTapDetector extends DoubleTap {
     cfg?: DoubleTapConfig
   ) {
     super(cb, cfg)
-    this.element = findElement(element)
+    this.element = FindElement(element)
     this.element.onmouseup = this._onMouseUp.bind(this)
   }
 }

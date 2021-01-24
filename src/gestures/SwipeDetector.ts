@@ -1,4 +1,4 @@
-import { findElement } from '../helpers/find-element.helper'
+import { FindElement } from '../helpers/dom.helper'
 import { Swipe, SwipeConfig } from './Swipe'
 import { GestureCallback } from '../interfaces/gesture-callback.interface'
 
@@ -11,7 +11,7 @@ export class SwipeDetector extends Swipe {
     cfg?: SwipeConfig
   ) {
     super(cb, cfg)
-    this.element = findElement(element)
+    this.element = FindElement(element)
     this.element.onmousedown = this._onMouseDown.bind(this)
     this.element.onmouseup = this._onMouseUp.bind(this)
   }
