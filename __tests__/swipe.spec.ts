@@ -24,4 +24,24 @@ describe('Swipe Gesture', () => {
     expect(cb).toHaveBeenCalledTimes(1)
     expect(cb).toHaveBeenCalledWith(response)
   })
+
+  test('Test short swipe', () => {
+    const cb = jest.fn()
+    const gesture = new SwipePrivate(cb)
+    const eventFrom = getMouseEvent(10, 15)
+    const eventTo = getMouseEvent(10, 50)
+
+    gesture.onMouseDown(eventFrom)
+    gesture.onMouseUp(eventTo)
+    expect(cb).toHaveBeenCalledTimes(0)
+  })
+
+  test('Test only up', () => {
+    const cb = jest.fn()
+    const gesture = new SwipePrivate(cb)
+    const eventTo = getMouseEvent(10, 120)
+
+    gesture.onMouseUp(eventTo)
+    expect(cb).toHaveBeenCalledTimes(0)
+  })
 })
