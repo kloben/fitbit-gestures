@@ -1,8 +1,7 @@
 import { GestureCallback } from '../interfaces/gesture-callback.interface'
-import { GestureDirection } from '../enums/gesture-direction.enum'
 import { GestureType } from '../enums/gesture-type.enum'
 import { Point } from '../interfaces/point.interface'
-import { GetDirection, GetDistance, GetPoint } from '../helpers/point.helper'
+import { GetDirection, GetPoint } from '../helpers/point.helper'
 
 export interface SwipeConfig {
   threshold?: number
@@ -28,27 +27,15 @@ export abstract class Swipe {
       return
     }
     const finalPoint = GetPoint(evt)
-    const distance = GetDistance(this.startPoint, finalPoint)
-    if (distance >= this.minThreshold) {
+    const dir = GetDirection(this.startPoint, finalPoint, this.minThreshold)
+    if (dir) {
       this.cb({
         type: GestureType.Swipe,
-        dir: GetDirection(this.startPoint, finalPoint, this.minThreshold),
+        dir,
         point: finalPoint,
         from: this.startPoint
       })
     }
     this.startPoint = null
-  }
-
-  private getDirection (x: number, y: number): GestureDirection {
-    if (y < -this.minThreshold) {
-      return GestureDirection.Up
-    } else if (y > this.minThreshold) {
-      return GestureDirection.Down
-    } else if (x < -this.minThreshold) {
-      return GestureDirection.Left
-    } else if (x > this.minThreshold) {
-      return GestureDirection.Right
-    }
   }
 }

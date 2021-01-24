@@ -16,10 +16,6 @@ export function GetPoint (evt: MouseEvent): Point {
   }
 }
 
-export function GetDistance (pointA: Point, pointB: Point): number {
-  return Math.max(Math.abs(pointA.x - pointB.x), Math.abs(pointA.y - pointB.y))
-}
-
 export function GetDirection (pointA: Point, pointB: Point, threshold: number): GestureDirection {
   let dir = ''
   const yDiff = pointB.y - pointA.y
