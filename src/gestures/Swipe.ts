@@ -2,7 +2,7 @@ import { GestureCallback } from '../interfaces/gesture-callback.interface'
 import { GestureDirection } from '../enums/gesture-direction.enum'
 import { GestureType } from '../enums/gesture-type.enum'
 import { Point } from '../interfaces/point.interface'
-import { GetDistance, GetPoint } from '../helpers/point.helper'
+import { GetDirection, GetDistance, GetPoint } from '../helpers/point.helper'
 
 export interface SwipeConfig {
   threshold?: number
@@ -32,7 +32,7 @@ export abstract class Swipe {
     if (distance >= this.minThreshold) {
       this.cb({
         type: GestureType.Swipe,
-        dir: this.getDirection(evt.screenX - this.startPoint.x, evt.screenY - this.startPoint.y),
+        dir: GetDirection(this.startPoint, finalPoint, this.minThreshold),
         point: finalPoint,
         from: this.startPoint
       })
