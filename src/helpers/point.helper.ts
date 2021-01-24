@@ -21,10 +21,10 @@ export function GetDistance (pointA: Point, pointB: Point): number {
 }
 
 export function GetDirection (pointA: Point, pointB: Point, threshold: number): GestureDirection {
-  const dir = []
+  let dir = ''
   const yDiff = pointB.y - pointA.y
   const xDiff = pointB.x - pointA.x
-  dir.push(yDiff > threshold ? GestureDirection.Down : (yDiff < -threshold ? GestureDirection.Up : ''))
-  dir.push(xDiff > threshold ? GestureDirection.Right : (xDiff < -threshold ? GestureDirection.Left : ''))
-  return <GestureDirection>dir.join('')
+  dir += yDiff > threshold ? GestureDirection.Down : (yDiff < -threshold ? GestureDirection.Up : '')
+  dir += xDiff > threshold ? GestureDirection.Right : (xDiff < -threshold ? GestureDirection.Left : '')
+  return dir.length ? <GestureDirection>dir : null
 }

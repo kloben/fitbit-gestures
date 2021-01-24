@@ -82,4 +82,34 @@ describe('Pointer Helper', () => {
 
     expect(response).toBe(GestureDirection.DownLeft)
   })
+
+  test('Test Down Left but not enough horizontal distance', () => {
+    const pointA = { x: 100, y: 100 }
+    const pointB = { x: 75, y: 135 }
+    const threshold = 25
+
+    const response = GetDirection(pointA, pointB, threshold)
+
+    expect(response).toBe(GestureDirection.Down)
+  })
+
+  test('Test Up Right but not enough vertical distance', () => {
+    const pointA = { x: 100, y: 100 }
+    const pointB = { x: 135, y: 90 }
+    const threshold = 25
+
+    const response = GetDirection(pointA, pointB, threshold)
+
+    expect(response).toBe(GestureDirection.Right)
+  })
+
+  test('Test not enough distance', () => {
+    const pointA = { x: 100, y: 100 }
+    const pointB = { x: 90, y: 110 }
+    const threshold = 25
+
+    const response = GetDirection(pointA, pointB, threshold)
+
+    expect(response).toBe(null)
+  })
 })
