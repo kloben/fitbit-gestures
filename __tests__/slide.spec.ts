@@ -32,4 +32,28 @@ describe('Slide Gesture', () => {
     expect(cb).toHaveBeenCalledTimes(2)
     expect(cb).toHaveBeenCalledWith(responseB)
   })
+
+  test('Test less than threshold', () => {
+    const cb = jest.fn()
+    const gesture = new SlidePrivate(cb)
+    const eventFrom = getMouseEvent(10, 15)
+    const eventTo = getMouseEvent(10, 19)
+
+    gesture.onMouseDown(eventFrom)
+    gesture.onMouseMove(eventTo)
+    gesture.onMouseUp(eventTo)
+    expect(cb).toHaveBeenCalledTimes(0)
+  })
+
+  test('Test slide without down', () => {
+    const cb = jest.fn()
+    const gesture = new SlidePrivate(cb)
+    const eventFrom = getMouseEvent(10, 15)
+    const eventTo = getMouseEvent(10, 45)
+
+    gesture.onMouseMove(eventFrom)
+    gesture.onMouseMove(eventTo)
+    gesture.onMouseUp(eventTo)
+    expect(cb).toHaveBeenCalledTimes(0)
+  })
 })

@@ -1,6 +1,7 @@
 import { GestureCallback } from '../interfaces/gesture-callback.interface'
 import { GestureType } from '../enums/gesture-type.enum'
 import { Point } from '../interfaces/point.interface'
+import { GetPoint, IsInsideThreshold, IsSamePoint } from '../helpers/point.helper'
 
 export interface SlideConfig {
   threshold?: number
@@ -19,28 +20,30 @@ export abstract class Slide {
   }
 
   protected _onMouseDown (evt: MouseEvent) {
-    const point = { x: evt.screenX, y: evt.screenY }
-    this.startPoint = point
-    this.lastPoint = point
+    this.startPoint = GetPoint(evt)
   }
 
   protected _onMouseMove (evt: MouseEvent) {
-    if (!this.startPoint || (this.lastPoint.x === evt.screenX && this.lastPoint.y === evt.screenY)) {
+    const movePoint = GetPoint(evt)
+    if (!this.startPoint || IsSamePoint(movePoint, this.startPoint) || IsInsideThreshold(movePoint, this.startPoint, this.minThreshold)) {
       return
     }
-    this.lastPoint = { x: evt.screenX, y: evt.screenY }
-    return this._generateEvent(false, { x: evt.screenX, y: evt.screenY })
+    this.lastPoint = movePoint
+    return this._generateEvent(false, movePoint)
   }
 
   protected _onMouseUp (evt: MouseEvent) {
-    const data = this._generateEvent(true, { x: evt.screenX, y: evt.screenY })
+    if (!this.lastPoint || !this.startPoint) {
+      return
+    }
+    const data = this._generateEvent(true, GetPoint(evt))
     this.startPoint = null
     this.lastPoint = null
     return data
   }
 
   private _generateEvent (ended: boolean, point: Point) {
-    if (!this.startPoint) {
+    if (!this.lastPoint || !this.startPoint) {
       return
     }
 
