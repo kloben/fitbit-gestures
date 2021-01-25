@@ -35,6 +35,7 @@ export class GestureDetector {
     this.tap = new TapPrivate(cb, cfg)
     this._addListener('up', this.tap.onMouseUp.bind(this.tap))
     this._addListener('down', this.tap.onMouseDown.bind(this.tap))
+    return this
   }
 
   onDoubleTap (cb: GestureCallback, cfg?: DoubleTapConfig) {
