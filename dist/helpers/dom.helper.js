@@ -1,10 +1,10 @@
 import document from 'document';
-export function findElement(element) {
+export function FindElement(element) {
     var el;
     if (typeof element === 'string') {
         el = document.getElementById(element);
     }
-    else {
+    else if (element.onmousemove !== undefined) {
         el = element;
     }
     if (!el) {

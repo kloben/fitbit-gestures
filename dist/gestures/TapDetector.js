@@ -1,11 +1,12 @@
 import { __extends } from "tslib";
-import { findElement } from './helpers/find-element.helper';
+import { FindElement } from '../helpers/dom.helper';
 import { Tap } from './Tap';
 var TapDetector = /** @class */ (function (_super) {
     __extends(TapDetector, _super);
     function TapDetector(element, cb) {
         var _this = _super.call(this, cb) || this;
-        _this.element = findElement(element);
+        _this.element = FindElement(element);
+        _this.element.onmouseup = _this._onMouseUp.bind(_this);
         _this.element.onmousedown = _this._onMouseDown.bind(_this);
         return _this;
     }
