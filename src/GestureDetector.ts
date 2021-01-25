@@ -7,6 +7,9 @@ import { SlidePrivate } from './gestures/SlidePrivate'
 import { LongPressPrivate } from './gestures/LongPressPrivate'
 import { GestureCallback } from './interfaces/gesture-callback.interface'
 import { TapPrivate } from './gestures/TapPrivate'
+import { TapConfig } from './gestures/Tap'
+import { LongPressConfig } from './gestures/LongPress'
+import { SlideConfig } from './gestures/Slide'
 
 export class GestureDetector {
   private readonly element: Element
@@ -28,8 +31,8 @@ export class GestureDetector {
     return this
   }
 
-  onTap (cb: GestureCallback) {
-    this.tap = new TapPrivate(cb)
+  onTap (cb: GestureCallback, cfg?: TapConfig) {
+    this.tap = new TapPrivate(cb, cfg)
     this._addListener('up', this.tap.onMouseUp.bind(this.tap))
     this._addListener('down', this.tap.onMouseDown.bind(this.tap))
   }
@@ -40,8 +43,8 @@ export class GestureDetector {
     return this
   }
 
-  onLongPress (cb: GestureCallback) {
-    this.longPress = new LongPressPrivate(cb)
+  onLongPress (cb: GestureCallback, cfg?: LongPressConfig) {
+    this.longPress = new LongPressPrivate(cb, cfg)
     this._addListener('up', this.longPress.onMouseUp.bind(this.longPress))
     this._addListener('down', this.longPress.onMouseDown.bind(this.longPress))
     this._addListener('move', this.longPress.onMouseMove.bind(this.longPress))
@@ -55,22 +58,22 @@ export class GestureDetector {
     return this
   }
 
-  onSlide (cb: GestureCallback) {
-    this.slide = new SlidePrivate(cb)
+  onSlide (cb: GestureCallback, cfg?: SlideConfig) {
+    this.slide = new SlidePrivate(cb, cfg)
     this._addListener('up', this.slide.onMouseUp.bind(this.slide))
     this._addListener('down', this.slide.onMouseDown.bind(this.slide))
     this._addListener('move', this.slide.onMouseMove.bind(this.slide))
     return this
   }
 
-  private _addListener (gesture: 'up' | 'down' | 'move', cb: Function) {
-    if (!this.callbacks[gesture]) {
-      this.callbacks[gesture] = []
-      this.element[`onmouse${gesture}`] = (evt: MouseEvent) => {
-        this.callbacks[gesture].forEach((fn: Function) => fn(evt))
+  private _addListener (action: 'up' | 'down' | 'move', cb: Function) {
+    if (!this.callbacks[action]) {
+      this.callbacks[action] = []
+      this.element[`onmouse${action}`] = (evt: MouseEvent) => {
+        this.callbacks[action].forEach((fn: Function) => fn(evt))
       }
     }
 
-    this.callbacks[gesture].push(cb)
+    this.callbacks[action].push(cb)
   }
 }
