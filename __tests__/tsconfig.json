@@ -2,13 +2,13 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "noEmit": true,
-    "checkJs": true,
-    "types": ["dom"]
+    "checkJs": true
   },
   "include": [
+    "**/*.ts",
+    "**/*.js",
+    "../src/**/*.ts",
+    "../src/**/*.js",
     "../node_modules/fitbit-sdk-types/types/device"
-  ],
-  "exclude": [
-    "src/index.ts"
-  ],
+  ]
 }

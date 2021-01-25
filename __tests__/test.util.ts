@@ -34,3 +34,14 @@ export function getMouseEvent (x: number, y: number): MouseEvent {
     }
   }
 }
+
+export function getFakeElement () {
+  return {
+    onmousedown: () => {
+    },
+    onmousemove: () => {
+    },
+    onmouseup: () => {
+    }
+  }
+}
