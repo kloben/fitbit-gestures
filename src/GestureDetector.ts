@@ -1,12 +1,12 @@
-import { SwipeConfig } from './Swipe'
-import { FindElement } from '../helpers/dom.helper'
-import { SwipePrivate } from './SwipePrivate'
-import { DoubleTapPrivate } from './DoubleTapPrivate'
-import { DoubleTapConfig } from './DoubleTap'
-import { SlidePrivate } from './SlidePrivate'
-import { LongPressPrivate } from './LongPressPrivate'
-import { GestureCallback } from '../interfaces/gesture-callback.interface'
-import { TapPrivate } from './TapPrivate'
+import { SwipeConfig } from './gestures/Swipe'
+import { FindElement } from './helpers/dom.helper'
+import { SwipePrivate } from './gestures/SwipePrivate'
+import { DoubleTapPrivate } from './gestures/DoubleTapPrivate'
+import { DoubleTapConfig } from './gestures/DoubleTap'
+import { SlidePrivate } from './gestures/SlidePrivate'
+import { LongPressPrivate } from './gestures/LongPressPrivate'
+import { GestureCallback } from './interfaces/gesture-callback.interface'
+import { TapPrivate } from './gestures/TapPrivate'
 
 export class GestureDetector {
   private readonly element: Element
