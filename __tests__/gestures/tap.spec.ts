@@ -1,9 +1,30 @@
 import { TapPrivate } from '../../src/gestures/TapPrivate'
-import { getMouseEvent, wait } from '../test.util'
+import { getFakeElement, getMouseEvent, wait } from '../test.util'
 import { GestureType } from '../../src/enums/gesture-type.enum'
 import { GestureEvent } from '../../src/interfaces/gesture-event.interface'
+import { TapDetector } from '../../src/gestures/TapDetector'
 
 describe('Tap Gesture', () => {
+
+  test('Public tap detector', () => {
+    const cb = jest.fn()
+    const element = getFakeElement()
+    new TapDetector(element, cb)
+
+    const event = getMouseEvent(10, 15)
+
+    element.onmousedown(event)
+    element.onmouseup(event)
+
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith({
+      type: GestureType.Tap,
+      point: {
+        x: 10,
+        y: 15
+      }
+    })
+  })
 
   test('Test single fast tap', () => {
     const cb = jest.fn()

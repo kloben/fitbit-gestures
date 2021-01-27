@@ -1,10 +1,30 @@
 import { DoubleTapPrivate } from '../../src/gestures/DoubleTapPrivate'
-import { getMouseEvent, wait } from '../test.util'
+import { getFakeElement, getMouseEvent, wait } from '../test.util'
 import { GestureEvent } from '../../src/interfaces/gesture-event.interface'
 import { GestureType } from '../../src/enums/gesture-type.enum'
 import { TapPrivate } from '../../src/gestures/TapPrivate'
+import { DoubleTapDetector } from '../../src/gestures/DoubleTapDetector'
 
 describe('Double Tap Gesture', () => {
+
+  test('Test public double tap', () => {
+    const cb = jest.fn()
+    const element = getFakeElement()
+    const event = getMouseEvent(10, 15)
+    new DoubleTapDetector(element, cb)
+
+    element.onmouseup(event)
+    element.onmouseup(event)
+
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith({
+      type: GestureType.DoubleTap,
+      point: {
+        x: 10,
+        y: 15
+      }
+    })
+  })
 
   test('Test simple double tap', () => {
     const cb = jest.fn()

@@ -1,9 +1,30 @@
-import { getMouseEvent, wait } from '../test.util'
+import { getFakeElement, getMouseEvent, wait } from '../test.util'
 import { GestureEvent } from '../../src/interfaces/gesture-event.interface'
 import { GestureType } from '../../src/enums/gesture-type.enum'
 import { LongPressPrivate } from '../../src/gestures/LongPressPrivate'
+import { LongPressDetector } from '../../src/gestures/LongPressDetector'
 
 describe('Long Press Gesture', () => {
+
+  test('Public long press detector', async () => {
+    const cb = jest.fn()
+    const event = getMouseEvent(10, 15)
+    const element = getFakeElement()
+    new LongPressDetector(element, cb)
+
+    element.onmousedown(event)
+    await wait(400)
+    element.onmouseup(event)
+
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith({
+      type: GestureType.LongPress,
+      point: {
+        x: 10,
+        y: 15
+      }
+    })
+  })
 
   test('Simple long press', async () => {
     const cb = jest.fn()

@@ -1,10 +1,31 @@
-import { getMouseEvent } from '../test.util'
+import { getFakeElement, getMouseEvent } from '../test.util'
 import { GestureType } from '../../src/enums/gesture-type.enum'
 import { GestureEvent } from '../../src/interfaces/gesture-event.interface'
 import { SwipePrivate } from '../../src/gestures/SwipePrivate'
 import { GestureDirection } from '../../src/enums/gesture-direction.enum'
+import { SwipeDetector } from '../../src/gestures/SwipeDetector'
 
 describe('Swipe Gesture', () => {
+
+  test('Public swipe detector', () => {
+    const cb = jest.fn()
+    const element = getFakeElement()
+    const eventFrom = getMouseEvent(10, 15)
+    const eventTo = getMouseEvent(10, 120)
+    const response: GestureEvent = {
+      type: GestureType.Swipe,
+      point: { x: 10, y: 120 },
+      from: { x: 10, y: 15 },
+      dir: GestureDirection.Down
+    }
+    new SwipeDetector(element, cb)
+
+    element.onmousedown(eventFrom)
+    expect(cb).toHaveBeenCalledTimes(0)
+    element.onmouseup(eventTo)
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith(response)
+  })
 
   test('Test basic swipe', () => {
     const cb = jest.fn()
