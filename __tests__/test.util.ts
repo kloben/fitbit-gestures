@@ -36,12 +36,16 @@ export function getMouseEvent (x: number, y: number): MouseEvent {
 }
 
 export function getFakeElement () {
-  return {
-    onmousedown: () => {
+  // @ts-ignore
+  return <Element><unknown>{
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onmousedown: (evt?: MouseEvent) => {
     },
-    onmousemove: () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onmousemove: (evt?: MouseEvent) => {
     },
-    onmouseup: () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onmouseup: (evt?: MouseEvent) => {
     }
   }
 }
