@@ -1,7 +1,7 @@
 import { GestureCallback } from '../interfaces/gesture-callback.interface'
 import { GestureType } from '../enums/gesture-type.enum'
 import { Point } from '../interfaces/point.interface'
-import { IsInsideThreshold } from '../helpers/point.helper'
+import { GetPoint, IsInsideThreshold } from '../helpers/point.helper'
 
 export interface TapConfig {
   interval?: number,
@@ -35,13 +35,11 @@ export abstract class Tap {
       return
     }
     const now = Date.now()
-    if (now - this.initialTime <= this.maxInterval && IsInsideThreshold(this.initialPoint, {
-      x: evt.screenX,
-      y: evt.screenY
-    }, this.maxThreshold)) {
+    const finalPoint = GetPoint(evt)
+    if (now - this.initialTime <= this.maxInterval && IsInsideThreshold(this.initialPoint, finalPoint, this.maxThreshold)) {
       this.cb({
         type: GestureType.Tap,
-        point: this.initialPoint
+        point: finalPoint
       })
     }
 

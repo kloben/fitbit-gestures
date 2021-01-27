@@ -99,8 +99,8 @@ describe('Tap Gesture', () => {
     const response: GestureEvent = {
       type: GestureType.Tap,
       point: {
-        x: 10,
-        y: 15
+        x: 5,
+        y: 25
       }
     }
 
@@ -137,7 +137,7 @@ describe('Tap Gesture', () => {
       type: GestureType.Tap,
       point: {
         x: 10,
-        y: 15
+        y: 100
       }
     }
 
