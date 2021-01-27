@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "rm -r ./dist && tsc",
+    "build": "eslint src/**/*.ts && rm -r ./dist && tsc",
     "lint": "eslint src/**/*.ts",
     "test": "jest --watch",
     "test:coverage": "jest --collectCoverage=true && open coverage/lcov-report/index.html"
