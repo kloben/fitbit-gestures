@@ -8,7 +8,21 @@ Install the library with `npm i fitbit-gestures` or `yarn add fitbit-gestures`
 
 ## Available gestures
 
-**Tap, Double Tap, Long Press, Swipe, Slide**
+| Gesture | Description | Examples
+| :---: | :--- |  ---  
+| ![Tap gesture][tapGif] | Regular "click" | Buttons
+| ![DoubleTap gesture][doubleTapGif] | Fast double "click" | Secondary actions
+| ![LongPress gesture][longPressGif] | Press without release | Secondary actions
+| ![Slide gesture][slideGif] | Press and move | Drag objects
+| ![Swipe gesture][swipeGif] | Press move and release | Navigation
+
+
+[tapGif]: ./demo/Tap.gif "Tap gesture"
+[doubleTapGif]: ./demo/DoubleTap.gif "DoubleTap gesture"
+[LongPressGif]: ./demo/LongPress.gif "LongPress gesture"
+[slideGif]: ./demo/Slide.gif "Slide gesture"
+[swipeGif]: ./demo/Swipe.gif "Swipe gesture"
+
 
 ## Usage
 
@@ -29,7 +43,7 @@ The selected element should have "pointer-events" set to "visible". Will work on
 
 ### Gesture Detector
 
-For some gestures, you can customize the detectors. View Single Gesture configuration below.
+All detectors are customizable. View configuration below.
 
 ```typescript
 import { GestureDetector, GestureEvent } from 'fitbit-gestures';
@@ -106,7 +120,7 @@ enum GestureDirection {
 
 ### Single gesture detectors
 
-If you only need one type of gesture on an element, it will be slightly faster to use a dedicated class for that. 
+If you only need one type of gesture on an element, it will be slightly faster to use a dedicated class. 
 
 ```typescript
 
