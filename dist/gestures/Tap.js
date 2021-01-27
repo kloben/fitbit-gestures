@@ -1,5 +1,5 @@
 import { GestureType } from '../enums/gesture-type.enum';
-import { IsInsideThreshold } from '../helpers/point.helper';
+import { GetPoint, IsInsideThreshold } from '../helpers/point.helper';
 var Tap = /** @class */ (function () {
     function Tap(cb, cfg) {
         this.cb = cb;
@@ -7,10 +7,7 @@ var Tap = /** @class */ (function () {
         this.maxThreshold = (cfg === null || cfg === void 0 ? void 0 : cfg.threshold) || 10;
     }
     Tap.prototype._onMouseDown = function (evt) {
-        this.initialPoint = {
-            x: evt.screenX,
-            y: evt.screenY
-        };
+        this.initialPoint = GetPoint(evt);
         this.initialTime = Date.now();
     };
     Tap.prototype._onMouseUp = function (evt) {
@@ -18,13 +15,11 @@ var Tap = /** @class */ (function () {
             return;
         }
         var now = Date.now();
-        if (now - this.initialTime <= this.maxInterval && IsInsideThreshold(this.initialPoint, {
-            x: evt.screenX,
-            y: evt.screenY
-        }, this.maxThreshold)) {
+        var finalPoint = GetPoint(evt);
+        if (now - this.initialTime <= this.maxInterval && IsInsideThreshold(this.initialPoint, finalPoint, this.maxThreshold)) {
             this.cb({
                 type: GestureType.Tap,
-                point: this.initialPoint
+                point: finalPoint
             });
         }
         this.initialPoint = null;

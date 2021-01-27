@@ -1,5 +1,5 @@
 import { GestureType } from '../enums/gesture-type.enum';
-import { IsInsideThreshold } from '../helpers/point.helper';
+import { GetPoint, IsInsideThreshold } from '../helpers/point.helper';
 var DoubleTap = /** @class */ (function () {
     function DoubleTap(cb, cfg) {
         this.cb = cb;
@@ -9,17 +9,14 @@ var DoubleTap = /** @class */ (function () {
     }
     DoubleTap.prototype._onMouseUp = function (evt) {
         var now = Date.now();
-        var actualPoint = {
-            x: evt.screenX,
-            y: evt.screenY
-        };
+        var actualPoint = GetPoint(evt);
         if (this.lastTime &&
             this.lastPoint &&
             now - this.lastTime <= this.maxInterval &&
             IsInsideThreshold(this.lastPoint, actualPoint, this.maxThreshold)) {
             this.cb({
                 type: GestureType.DoubleTap,
-                point: this.lastPoint
+                point: actualPoint
             });
             this.lastTime = null;
             this.lastPoint = null;
