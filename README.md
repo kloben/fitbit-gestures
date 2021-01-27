@@ -96,7 +96,11 @@ enum GestureDirection {
   Up = 'Up',
   Down = 'Down',
   Left = 'Left',
-  Right = 'Right'
+  Right = 'Right',
+  UpRight = 'UpRight',
+  UpLeft = 'UpLeft',
+  DownRight = 'DownRight',
+  DownLeft = 'DownLeft',
 }
 ```
 
