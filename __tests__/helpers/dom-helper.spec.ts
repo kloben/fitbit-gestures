@@ -11,6 +11,15 @@ describe('Dom Helper', () => {
     expect(response).toBe(input)
   })
 
+  test('Test find from wrong element', () => {
+    // @ts-ignore
+    const input = <Element><unknown>{}
+
+    expect(() => {
+      FindElement(input)
+    }).toThrowError()
+  })
+
   test('Test find from string success', () => {
     const input = 'ok'
 
