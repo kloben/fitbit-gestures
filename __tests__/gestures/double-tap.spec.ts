@@ -85,8 +85,8 @@ describe('Double Tap Gesture', () => {
     const response: GestureEvent = {
       type: GestureType.DoubleTap,
       point: {
-        x: 10,
-        y: 15
+        x: 15,
+        y: 23
       }
     }
 
@@ -118,8 +118,8 @@ describe('Double Tap Gesture', () => {
     const response: GestureEvent = {
       type: GestureType.DoubleTap,
       point: {
-        x: 10,
-        y: 15
+        x: 15,
+        y: 123
       }
     }
 

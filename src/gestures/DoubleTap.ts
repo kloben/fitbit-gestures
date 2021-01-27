@@ -1,7 +1,7 @@
 import { GestureCallback } from '../interfaces/gesture-callback.interface'
 import { GestureType } from '../enums/gesture-type.enum'
 import { Point } from '../interfaces/point.interface'
-import { IsInsideThreshold } from '../helpers/point.helper'
+import { GetPoint, IsInsideThreshold } from '../helpers/point.helper'
 
 export interface DoubleTapConfig {
   interval?: number,
@@ -24,10 +24,7 @@ export abstract class DoubleTap {
 
   protected _onMouseUp (evt: MouseEvent) {
     const now = Date.now()
-    const actualPoint = {
-      x: evt.screenX,
-      y: evt.screenY
-    }
+    const actualPoint = GetPoint(evt)
 
     if (
       this.lastTime &&
@@ -37,7 +34,7 @@ export abstract class DoubleTap {
     ) {
       this.cb({
         type: GestureType.DoubleTap,
-        point: this.lastPoint
+        point: actualPoint
       })
       this.lastTime = null
       this.lastPoint = null

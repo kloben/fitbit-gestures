@@ -63,7 +63,7 @@ describe('Gesture detector', () => {
     })
     expect(cb).toHaveBeenCalledWith(<GestureEvent>{
       type: GestureType.DoubleTap,
-      point: {x: 100, y: 100}
+      point: {x: 90, y: 90}
     })
   })
 

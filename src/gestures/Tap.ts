@@ -23,10 +23,7 @@ export abstract class Tap {
   }
 
   protected _onMouseDown (evt: MouseEvent) {
-    this.initialPoint = {
-      x: evt.screenX,
-      y: evt.screenY
-    }
+    this.initialPoint = GetPoint(evt)
     this.initialTime = Date.now()
   }
 
