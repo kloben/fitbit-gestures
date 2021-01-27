@@ -76,6 +76,31 @@ describe('Slide Gesture', () => {
     expect(cb).toHaveBeenCalledTimes(0)
   })
 
+  test('Test less than threshold override', () => {
+    const cb = jest.fn()
+    const gesture = new SlidePrivate(cb, {threshold: 1})
+    const eventFrom = getMouseEvent(10, 15)
+    const eventTo = getMouseEvent(10, 19)
+
+    gesture.onMouseDown(eventFrom)
+    gesture.onMouseMove(eventTo)
+    gesture.onMouseUp(eventTo)
+
+    expect(cb).toHaveBeenCalledTimes(2)
+    expect(cb).toHaveBeenCalledWith({
+      type: GestureType.Slide,
+      point: { x: 10, y: 19 },
+      from: { x: 10, y: 15 },
+      ended: false
+    })
+    expect(cb).toHaveBeenCalledWith({
+      type: GestureType.Slide,
+      point: { x: 10, y: 19 },
+      from: { x: 10, y: 15 },
+      ended: true
+    })
+  })
+
   test('Test slide without down', () => {
     const cb = jest.fn()
     const gesture = new SlidePrivate(cb)

@@ -54,7 +54,26 @@ describe('Swipe Gesture', () => {
 
     gesture.onMouseDown(eventFrom)
     gesture.onMouseUp(eventTo)
+
     expect(cb).toHaveBeenCalledTimes(0)
+  })
+
+  test('Test short swipe override', () => {
+    const cb = jest.fn()
+    const gesture = new SwipePrivate(cb, {threshold: 10})
+    const eventFrom = getMouseEvent(10, 15)
+    const eventTo = getMouseEvent(10, 50)
+
+    gesture.onMouseDown(eventFrom)
+    gesture.onMouseUp(eventTo)
+
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith({
+      type: GestureType.Swipe,
+      point: { x: 10, y: 50 },
+      from: { x: 10, y: 15 },
+      dir: GestureDirection.Down
+    })
   })
 
   test('Test only up', () => {
