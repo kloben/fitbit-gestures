@@ -5,9 +5,10 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "eslint src/**/*.ts && rm -r ./dist && tsc",
+    "build": "eslint src/**/*.ts && jest && rm -r ./dist && tsc",
     "lint": "eslint src/**/*.ts",
-    "test": "jest --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "test:coverage": "jest --collectCoverage=true && open coverage/lcov-report/index.html"
   },
   "author": "Valga Medios",
