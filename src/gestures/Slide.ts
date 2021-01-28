@@ -25,7 +25,10 @@ export abstract class Slide {
 
   protected _onMouseMove (evt: MouseEvent) {
     const movePoint = GetPoint(evt)
-    if (!this.startPoint || IsSamePoint(movePoint, this.startPoint) || IsInsideThreshold(movePoint, this.startPoint, this.minThreshold)) {
+    if (!this.startPoint) {
+      this.startPoint = movePoint
+    }
+    if (IsSamePoint(movePoint, this.startPoint) || IsInsideThreshold(movePoint, this.startPoint, this.minThreshold)) {
       return
     }
     this.lastPoint = movePoint

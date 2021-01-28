@@ -111,6 +111,18 @@ describe('Slide Gesture', () => {
     gesture.onMouseMove(eventTo)
     gesture.onMouseUp(eventTo)
 
-    expect(cb).toHaveBeenCalledTimes(0)
+    expect(cb).toHaveBeenCalledTimes(2)
+    expect(cb).toHaveBeenCalledWith({
+      type: GestureType.Slide,
+      point: { x: 10, y: 45 },
+      from: { x: 10, y: 15 },
+      ended: false
+    })
+    expect(cb).toHaveBeenCalledWith({
+      type: GestureType.Slide,
+      point: { x: 10, y: 45 },
+      from: { x: 10, y: 15 },
+      ended: true
+    })
   })
 })
