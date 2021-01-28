@@ -76,6 +76,25 @@ describe('Swipe Gesture', () => {
     })
   })
 
+  test('Test swipe without down', () => {
+    const cb = jest.fn()
+    const gesture = new SwipePrivate(cb)
+    const eventFrom = getMouseEvent(10, 10)
+    const eventTo = getMouseEvent(120, 15)
+
+    gesture.onMouseMove(eventFrom)
+    gesture.onMouseMove(eventTo)
+
+    gesture.onMouseUp(eventTo)
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith({
+      type: GestureType.Swipe,
+      point: { x: 120, y: 15 },
+      from: { x: 10, y: 10 },
+      dir: GestureDirection.Right
+    })
+  })
+
   test('Test only up', () => {
     const cb = jest.fn()
     const gesture = new SwipePrivate(cb)

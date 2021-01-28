@@ -22,6 +22,12 @@ export abstract class Swipe {
     this.startPoint = GetPoint(evt)
   }
 
+  protected _onMouseMove (evt: MouseEvent) {
+    if (!this.startPoint) {
+      this.startPoint = GetPoint(evt)
+    }
+  }
+
   protected _onMouseUp (evt: MouseEvent) {
     if (!this.startPoint) {
       return

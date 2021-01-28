@@ -5,6 +5,10 @@ export class SwipePrivate extends Swipe {
     super._onMouseDown(evt)
   }
 
+  onMouseMove (evt: MouseEvent) {
+    super._onMouseMove(evt)
+  }
+
   onMouseUp (evt: MouseEvent) {
     super._onMouseUp(evt)
   }

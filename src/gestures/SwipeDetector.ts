@@ -13,6 +13,7 @@ export class SwipeDetector extends Swipe {
     super(cb, cfg)
     this.element = FindElement(element)
     this.element.onmousedown = this._onMouseDown.bind(this)
+    this.element.onmousemove = this._onMouseMove.bind(this)
     this.element.onmouseup = this._onMouseUp.bind(this)
   }
 }
