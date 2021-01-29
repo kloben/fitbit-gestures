@@ -5,7 +5,10 @@
     "noEmit": false,
     "sourceMap": false,
     "declaration": true,
-    "removeComments": false
+    "removeComments": false,
+    "types": [
+      "jest"
+    ]
   },
   "include": [
     "**/*.ts",
@@ -17,5 +20,6 @@
     "./node_modules/fitbit-sdk-types/types/companion/crypto.d.ts",
     "./node_modules/fitbit-sdk-types/types/companion/file-transfer.d.ts",
     "./node_modules/fitbit-sdk-types/types/companion/user-settings.d.ts",
+    "__tests__"
   ]
 }

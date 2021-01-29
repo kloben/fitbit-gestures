@@ -8,7 +8,21 @@ Install the library with `npm i fitbit-gestures` or `yarn add fitbit-gestures`
 
 ## Available gestures
 
-**Tap, Double Tap, Long Press, Swipe, Slide**
+| Gesture | Description | Examples
+| :---: | :--- |  ---  
+| ![Tap gesture][tapGif] | Regular "click" | Buttons
+| ![DoubleTap gesture][doubleTapGif] | Fast double "click" | Secondary actions
+| ![LongPress gesture][longPressGif] | Press without release | Secondary actions
+| ![Slide gesture][slideGif] | Press and move | Drag objects
+| ![Swipe gesture][swipeGif] | Press move and release | Navigation
+
+
+[tapGif]: ./demo/Tap.gif "Tap gesture"
+[doubleTapGif]: ./demo/DoubleTap.gif "DoubleTap gesture"
+[LongPressGif]: ./demo/LongPress.gif "LongPress gesture"
+[slideGif]: ./demo/Slide.gif "Slide gesture"
+[swipeGif]: ./demo/Swipe.gif "Swipe gesture"
+
 
 ## Usage
 
@@ -29,7 +43,7 @@ The selected element should have "pointer-events" set to "visible". Will work on
 
 ### Gesture Detector
 
-For some gestures, you can customize the detectors. View Single Gesture configuration below.
+All detectors are customizable. View configuration below.
 
 ```typescript
 import { GestureDetector, GestureEvent } from 'fitbit-gestures';
@@ -65,7 +79,7 @@ interface GestureEvent {
   point: Point,
   from?: Point,                   //Swipe & Slide only
   dir?: GestureDirection,         //Swipe only
-  status?: GestureStatus          //Slide only
+  ended?: boolean                 //Slide only
 }
 ```
 
@@ -96,42 +110,44 @@ enum GestureDirection {
   Up = 'Up',
   Down = 'Down',
   Left = 'Left',
-  Right = 'Right'
-}
-```
-
-##### Status (Slide only)
-
-```typescript
-enum GestureStatus {
-  Started = 'Started',
-  Moved = 'Moved',
-  Ended = 'Ended'
+  Right = 'Right',
+  UpRight = 'UpRight',
+  UpLeft = 'UpLeft',
+  DownRight = 'DownRight',
+  DownLeft = 'DownLeft',
 }
 ```
 
 ### Single gesture detectors
 
-If you only need one type of gesture on an element, it will be slightly faster to use a dedicated class for that. 
+If you only need one type of gesture on an element, it will be slightly faster to use a dedicated class. 
 
 ```typescript
 
 //Optional configurations
-const swipeConfig: SwipeConfig = {
-  threshold: 100
-};
+const tapConfig: TapConfig = {
+  interval: 250,
+  threshold: 10
+}
 const doubleTapConfig: DoubleTapConfig = {
-  interval: 250
+  interval: 250,
+  threshold: 10
 }
 const longPressConfig: LongPressConfig = {
   time: 300,
   threshold: 10
 }
+const slideConfig: SlideConfig = {
+  threshold: 10
+}
+const swipeConfig: SwipeConfig = {
+  threshold: 100
+}
 
-const tap = new TapDetector('tapElement', onGesture.bind(this));
+const tap = new TapDetector('tapElement', onGesture.bind(this), tapConfig);
 const doubleTap = new DoubleTapDetector('doubleTapElement', onGesture.bind(this), doubleTapConfig);
 const longPress = new LongPressDetector('longPressElement', onGesture.bind(this));
-const slide = new SlideDetector('slideElement', onGesture.bind(this));
+const slide = new SlideDetector('slideElement', onGesture.bind(this), slideConfig);
 const swipe = new SwipeDetector('swipeElement', onGesture.bind(this), swipeConfig);
 
 function onGesture(event: GestureEvent) {
@@ -142,18 +158,19 @@ function onGesture(event: GestureEvent) {
   }
 }
 ```
-
-##### Swipe configuration
+##### Tap configuration
 
 | Attribute | Description | Default |
 | --- | :--- | --- |
-| threshold | Minimum distance (in pixels) required to trigger the event | 100px
+| **interval** | Maximum time (in ms) between start touching and releasing | 250ms
+| **threshold** | Maximum allowed distance (in px) between start touching and releasing | 10px
 
 ##### DoubleTap configuration
 
 | Attribute | Description | Default |
 | --- | :--- | --- |
-| **interval** | Time (in ms) required to trigger the event | 250ms
+| **interval** | Maximum time (in ms) between taps | 250ms
+| **threshold** | Maximum allowed distance (in px) between taps | 10px
 
 ##### LongPress configuration
 
@@ -161,3 +178,15 @@ function onGesture(event: GestureEvent) {
 | --- | :--- | --- |
 | **time** | Minimum time (in ms) required to trigger the event | 300ms
 | **threshold** | Max distance (in px) allowed | 10px
+
+##### Slide configuration
+
+| Attribute | Description | Default |
+| --- | :--- | --- |
+| **threshold** | Minimum distance (in pixels) to start recognizing | 10px
+
+##### Swipe configuration
+
+| Attribute | Description | Default |
+| --- | :--- | --- |
+| **threshold** | Minimum distance (in pixels) required to trigger the event | 100px
