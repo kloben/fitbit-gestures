@@ -84,8 +84,8 @@ describe('Swipe Gesture', () => {
 
     gesture.onMouseMove(eventFrom)
     gesture.onMouseMove(eventTo)
-
     gesture.onMouseUp(eventTo)
+
     expect(cb).toHaveBeenCalledTimes(1)
     expect(cb).toHaveBeenCalledWith({
       type: GestureType.Swipe,

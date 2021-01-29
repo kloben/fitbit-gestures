@@ -8,6 +8,9 @@ var SwipePrivate = /** @class */ (function (_super) {
     SwipePrivate.prototype.onMouseDown = function (evt) {
         _super.prototype._onMouseDown.call(this, evt);
     };
+    SwipePrivate.prototype.onMouseMove = function (evt) {
+        _super.prototype._onMouseMove.call(this, evt);
+    };
     SwipePrivate.prototype.onMouseUp = function (evt) {
         _super.prototype._onMouseUp.call(this, evt);
     };

@@ -8,5 +8,6 @@ export declare abstract class Swipe {
     private startPoint;
     constructor(cb: GestureCallback, cfg?: SwipeConfig);
     protected _onMouseDown(evt: MouseEvent): void;
+    protected _onMouseMove(evt: MouseEvent): void;
     protected _onMouseUp(evt: MouseEvent): void;
 }

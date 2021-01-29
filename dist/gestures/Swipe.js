@@ -8,6 +8,11 @@ var Swipe = /** @class */ (function () {
     Swipe.prototype._onMouseDown = function (evt) {
         this.startPoint = GetPoint(evt);
     };
+    Swipe.prototype._onMouseMove = function (evt) {
+        if (!this.startPoint) {
+            this.startPoint = GetPoint(evt);
+        }
+    };
     Swipe.prototype._onMouseUp = function (evt) {
         if (!this.startPoint) {
             return;
