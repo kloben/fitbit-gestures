@@ -10,4 +10,4 @@ const document = {
   }
 }
 
-module.exports = document
+export default document
