@@ -11,7 +11,7 @@
     ]
   },
   "include": [
-    "./src/**/*.ts",
+    "./src/index.ts",
     "./node_modules/fitbit-sdk-types/types/device",
     "./node_modules/fitbit-sdk-types/types/companion"
   ],

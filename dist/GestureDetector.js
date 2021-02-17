@@ -35,7 +35,7 @@ var GestureDetector = /** @class */ (function () {
     GestureDetector.prototype.onSwipe = function (cb, cfg) {
         this.swipe = new SwipePrivate(cb, cfg);
         this._addListener('up', this.swipe.onMouseUp.bind(this.swipe));
-        this._addListener('down', this.swipe.onMouseDown.bind(this.slide));
+        this._addListener('down', this.swipe.onMouseDown.bind(this.swipe));
         this._addListener('down', this.swipe.onMouseDown.bind(this.swipe));
         return this;
     };
