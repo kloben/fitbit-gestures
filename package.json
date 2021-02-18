@@ -1,6 +1,6 @@
 {
   "name": "fitbit-gestures",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Library to detect gestures on Fitbit devices",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
