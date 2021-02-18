@@ -4,7 +4,7 @@ export function FindElement(element) {
     if (typeof element === 'string') {
         el = document.getElementById(element);
     }
-    else if (element.onmousemove !== undefined) {
+    else if (typeof element === 'object') {
         el = element;
     }
     if (!el) {
